@@ -1,31 +1,20 @@
 "-------------------------------------------------------------------------------
-" Plugin Management
+" Plugin Management {{{1
 "-------------------------------------------------------------------------------
 filetype off
 set nocompatible               " Be iMproved
 
+"--------------------------------------
+" NeoBundle Plugin {{{2
+"--------------------------------------
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-" vim-quickrun
-NeoBundle 'https://github.com/thinca/vim-quickrun.git'
-
-" vim-indent-guides
-NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
-colorscheme default
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkRed ctermbg=darkgray
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  guibg=DarkGreen ctermbg=darkcyan
-let g:indent_guides_color_change_percent = 30
-let g:indent_guides_guide_size = 1
-
-
 "--------------------------------------
-" Plugin for file exproler
+" Plugin for file exproler {{{2
 "--------------------------------------
 " ctrlp.vim
 NeoBundle 'https://github.com/kien/ctrlp.vim.git'
@@ -48,32 +37,47 @@ endfunc
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 
 "--------------------------------------
-" Plugin for git
+" Plugin for git {{{2
 "--------------------------------------
 NeoBundle 'https://github.com/tpope/vim-fugitive.git'
 NeoBundle 'https://github.com/tpope/vim-fugitive.gi://github.com/gregsexton/gitv.git'
 
+"--------------------------------------
+" Plugin for programing {{{2
+"--------------------------------------
+" vim-quickrun
+NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 
-"--------------------------------------
-" Plugin for programing
-"--------------------------------------
+" vim-indent-guides
+NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
+colorscheme default
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkRed ctermbg=darkgray
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  guibg=DarkGreen ctermbg=darkcyan
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
+
+" static analyzer
 NeoBundle 'https://github.com/scrooloose/syntastic.git'
 
 " python 
 NeoBundle 'nvie/vim-flake8'
+NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
 
-filetype on
-
+"--------------------------------------
+" Plugin for write text docment or novel {{{2
+"--------------------------------------
+NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
 "-------------------------------------------------------------------------------
-" basic settings
+" basic settings {{{1
 "-------------------------------------------------------------------------------
 set encoding=utf8
 set scrolloff=5
 
-
 "-------------------------------------------------------------------------------
-" Text, tab and indent settings
+" Text, tab and indent settings {{{1
 "-------------------------------------------------------------------------------
 set shiftwidth=4
 set tabstop=4
@@ -84,7 +88,7 @@ set wrap
 set number
 
 "-------------------------------------------------------------------------------
-" Key mapping
+" Key mapping {{{1
 "-------------------------------------------------------------------------------
 " <Space>. : open .vimrc
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
@@ -92,8 +96,13 @@ nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 " <Ctrl> + p : Using ctrlp
 let g:ctrlp_map = '<c-p>'
 
-"-------------------------------------------------------------------------------
-" 
-"-------------------------------------------------------------------------------
+" If filetype is text or novela, <Leader>g : Count manuscript paper
+noremap <Leader>g :JpCountPages 20 20 <Return>
 
+"-------------------------------------------------------------------------------
+" Other {{{1
+"-------------------------------------------------------------------------------
+set foldmethod=marker
 
+filetype plugin indent on
+filetype on
