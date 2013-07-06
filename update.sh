@@ -13,32 +13,31 @@ fi
 PRGDIR=`pwd`
 echo ""
 echo "====================================================="
-echo " This is startup tool."
+echo " This is update tool."
 echo " Execution in $PRGDIR."
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 # git clone NeoBundle on ~/.vim/bundle
 BUNDLE_DIR=".vim/bundle"
 if [ ! -d "$HOME/$BUNDLE_DIR" ]; then
-    echo "====================================================="
-    echo " Create directory at HOME."
-    mkdir -p $HOME/$BUNDLE_DIR
+    echo "[Error] Could not Found .vim/bundle directory."
     echo ""
+    exit 1
 fi
 
-if [ ! -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
-    echo "====================================================="
-    echo " Get neobundle.vim."
-    pushd $HOME/$BUNDLE_DIR
-    git clone git://github.com/Shougo/neobundle.vim.git
-    popd
-    echo ""
+if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
+#    echo "====================================================="
+#    echo " Update neobundle.vim."
+#    pushd $HOME/$BUNDLE_DIR
+#    git pull git://github.com/Shougo/neobundle.vim.git
+#    popd
+    echo "Skip update neobundle.vim"
 fi
 
 # setup .vimrc file
-if [ ! -f "$HOME/.vimrc" ]; then
+if [ -f "$HOME/.vimrc" ]; then
     echo "====================================================="
-    echo " Copy .vimrc file."
+    echo " Update .vimrc file."
     cp vimrc $HOME/.vimrc
     echo ""
 fi
@@ -46,17 +45,19 @@ fi
 # setup ftplugin
 FTPLUGIN_DIR=".vim/ftplugin"
 if [ ! -d "$HOME/$FTPLUGIN_DIR" ]; then
-    echo "====================================================="
-    echo " Create ftplugin directory."
-    mkdir -p $HOME/$FTPLUGIN_DIR
+    echo "[Error] Could not found ftplugin directory."
     echo ""
 fi
 
 for _ft in vim/ftplugin/*.vim
 do
-    if [ ! -f "$HOME/$FTPLUGIN_DIR/${_ft##*/}" ];then
+    if [ -f "$HOME/$FTPLUGIN_DIR/${_ft##*/}" ];then
         echo "====================================================="
-        echo " Create ${_ft##*/} file in ftplugin directory."
+        echo " Update filetype ${_ft##*/}."
+        cp ${_ft} $HOME/$FTPLUGIN_DIR/
+    else
+        echo "====================================================="
+        echo " Add filetype ${_ft##*/}."
         cp ${_ft} $HOME/$FTPLUGIN_DIR/
     fi
 done
