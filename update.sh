@@ -31,7 +31,8 @@ if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
 #    pushd $HOME/$BUNDLE_DIR
 #    git pull git://github.com/Shougo/neobundle.vim.git
 #    popd
-    echo "Skip update neobundle.vim"
+    echo "[NOTICE] Skip update neobundle.vim"
+    echo ""
 fi
 
 # setup .vimrc file
