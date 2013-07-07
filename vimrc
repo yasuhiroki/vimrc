@@ -17,7 +17,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " Plugin for file exproler {{{2
 "--------------------------------------
 " ctrlp.vim
-NeoBundle 'https://github.com/kien/ctrlp.vim.git'
+NeoBundle 'git://github.com/kien/ctrlp.vim.git'
 if neobundle#is_installed('ctrlp.vim')
     let g:ctrlp_use_migemo = 1
     let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
@@ -36,22 +36,23 @@ if neobundle#is_installed('ctrlp.vim')
 endif
 
 " NERD Tree
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+NeoBundle 'git://github.com/scrooloose/nerdtree.git'
 
 "--------------------------------------
 " Plugin for git {{{2
 "--------------------------------------
-NeoBundle 'https://github.com/tpope/vim-fugitive.git'
-NeoBundle 'https://github.com/tpope/vim-fugitive.gi://github.com/gregsexton/gitv.git'
+NeoBundle 'git://github.com/tpope/vim-fugitive.git'
+NeoBundle 'git://github.com/gregsexton/gitv.git'
+autocmd FileType git :setlocal foldlevel=99
 
 "--------------------------------------
 " Plugin for programing {{{2
 "--------------------------------------
 " vim-quickrun
-NeoBundle 'https://github.com/thinca/vim-quickrun.git'
+NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 
 " vim-indent-guides
-NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
+NeoBundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
@@ -61,16 +62,26 @@ let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
 
 " static analyzer
-NeoBundle 'https://github.com/scrooloose/syntastic.git'
+NeoBundle 'git://github.com/scrooloose/syntastic.git'
 
 " python 
 NeoBundle 'nvie/vim-flake8'
-NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
+NeoBundle 'git://github.com/alfredodeza/pytest.vim.git'
 
 "--------------------------------------
 " Plugin for write text docment or novel {{{2
 "--------------------------------------
-NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
+NeoBundle 'git://github.com/fuenor/JpFormat.vim.git'
+
+"--------------------------------------
+" Plugin for buffer {{{2
+"--------------------------------------
+" buftabs
+NeoBundle 'vim-scripts/buftabs'
+
+let g:buftabs_only_basename = 1
+let g:buftabs_in_statusline = 1
+let g:buftabs_active_highlight_group="Visual"
 
 "-------------------------------------------------------------------------------
 " basic settings {{{1
@@ -90,8 +101,17 @@ set wrap
 set number
 
 "-------------------------------------------------------------------------------
+" status line settings {{{1
+"-------------------------------------------------------------------------------
+set statusline=%=\ [%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
+set laststatus=2
+
+"-------------------------------------------------------------------------------
 " Key mapping {{{1
 "-------------------------------------------------------------------------------
+"--------------------------------------
+" Key mapping for plugin {{{2
+"--------------------------------------
 " <Space>. : open .vimrc
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 
@@ -100,6 +120,11 @@ let g:ctrlp_map = '<c-p>'
 
 " If filetype is text or novela, <Leader>g : Count manuscript paper
 noremap <Leader>g :JpCountPages 20 20 <Return>
+
+"--------------------------------------
+" Key mapping for buffer {{{2
+"--------------------------------------
+map <F3> <ESC>:bn<CR>
 
 "-------------------------------------------------------------------------------
 " Other {{{1
