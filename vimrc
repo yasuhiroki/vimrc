@@ -186,7 +186,7 @@ function! DisplayCreator(mode)  "{{{2
         let l:file_name = expand("%:r")
         let l:memo_file = file_name . "_memo.txt"
         let l:abstract_file = file_name . "_abstract.txt"
-        execute "15vnew ".memo_file
+        execute "40vnew ".memo_file
         execute "15new ".abstract_file
 
         call feedkeys("\<C-w>\<C-l>")
