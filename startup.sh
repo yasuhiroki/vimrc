@@ -62,6 +62,23 @@ do
 done
 echo ""
 
+# color solarized
+COLORS_DIR=".vim/colors"
+#if [ ! -d "$HOME/$COLORS_DIR" ];then
+#    echo "====================================================="
+#    echo " Create colors directory."
+#    mkdir -p $HOME/$COLORS_DIR
+#fi
+#
+#if [ ! -f "$HOME/$COLORS_DIR/solarized.vim" ];then
+#    echo "====================================================="
+#    echo " Get and Set solarized.vim."
+#    pushd $HOME/$COLORS_DIR
+#    git clone git://github.com/altercation/vim-colors-solarized.git
+#    cp vim-colors-solarized/colors/solarized.vim .
+#    popd
+#fi
+
 echo ""
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo " Finish start-up."

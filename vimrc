@@ -97,8 +97,15 @@ set tabstop=4
 set smarttab
 set expandtab
 set autoindent
+
+"-------------------------------------------------------------------------------
+" Display settings {{{1
+"-------------------------------------------------------------------------------
 set wrap
 set number
+set title
+set ruler
+
 
 "-------------------------------------------------------------------------------
 " status line settings {{{1
@@ -148,11 +155,62 @@ vmap ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohlsearch<CR>
 vmap ,b v`<I<CR><esc>k0i/*<ESC>`>j0i*/<CR><esc><ESC>
 vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
 
+"--------------------------------------
+" Key mapping for vim preparing {{{2
+"--------------------------------------
 
 "-------------------------------------------------------------------------------
 " Other {{{1
 "-------------------------------------------------------------------------------
 set foldmethod=marker
 
+"--------------------------------------
+" Colorscheme {{{2
+"--------------------------------------
+"NeoBundle 'altercation/vim-colors-solarized'
+"syntax on
+"set t_Co=16
+"set background=dark
+"colorscheme solarized
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+
+"-------------------------------------------------------------------------------
+" Origin Tools {{{1
+"-------------------------------------------------------------------------------
+function! DisplayCreator(mode)  "{{{2
+
+    if a:mode == "novel"
+        :only
+
+        let l:file_name = expand("%:r")
+        let l:memo_file = file_name . "_memo.txt"
+        let l:abstract_file = file_name . "_abstract.txt"
+        execute "15vnew ".memo_file
+        execute "15new ".abstract_file
+
+        call feedkeys("\<C-w>\<C-l>")
+    elseif a:mode == "programming"    
+        :only
+
+        :NERDTree
+        :Gitv
+    endif
+
+endfunction
+
+function! ListDisplayCreator(argv, cmd, cur)
+    return "
+        \novel\n
+        \programming\n
+        \"
+endfunction
+
+command! -nargs=1 -complete=custom,ListDisplayCreator -bar DisplayPrepare :call DisplayCreator(<q-args>)
+
+
+"-------------------------------------------------------------------------------
+" file type on {{{1
+"-------------------------------------------------------------------------------
 filetype plugin indent on
 filetype on
