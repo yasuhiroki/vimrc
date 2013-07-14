@@ -13,6 +13,13 @@ endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
+
+"--------------------------------------
+" Plugin for unite interface {{{2
+"--------------------------------------
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+
 "--------------------------------------
 " Plugin for file exproler {{{2
 "--------------------------------------
@@ -167,12 +174,13 @@ set foldmethod=marker
 "--------------------------------------
 " Colorscheme {{{2
 "--------------------------------------
-"NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 "syntax on
-"set t_Co=16
-"set background=dark
-"colorscheme solarized
-"let g:solarized_termcolors=256
+set t_Co=256
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+syntax enable
 "let g:solarized_termtrans=1
 
 "-------------------------------------------------------------------------------
