@@ -30,7 +30,7 @@ if [ ! -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
     echo "====================================================="
     echo " Get neobundle.vim."
     pushd $HOME/$BUNDLE_DIR
-    git clone git://github.com/Shougo/neobundle.vim.git
+    git clone https://github.com/Shougo/neobundle.vim.git
     popd
     echo ""
 fi
@@ -74,7 +74,7 @@ COLORS_DIR=".vim/colors"
 #    echo "====================================================="
 #    echo " Get and Set solarized.vim."
 #    pushd $HOME/$COLORS_DIR
-#    git clone git://github.com/altercation/vim-colors-solarized.git
+#    git clone https://github.com/altercation/vim-colors-solarized.git
 #    cp vim-colors-solarized/colors/solarized.vim .
 #    popd
 #fi

@@ -29,7 +29,7 @@ if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
 #    echo "====================================================="
 #    echo " Update neobundle.vim."
 #    pushd $HOME/$BUNDLE_DIR
-#    git pull git://github.com/Shougo/neobundle.vim.git
+#    git pull https://github.com/Shougo/neobundle.vim.git
 #    popd
     echo "[NOTICE] Skip update neobundle.vim"
     echo ""

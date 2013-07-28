@@ -17,14 +17,14 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 "--------------------------------------
 " Plugin for unite interface {{{2
 "--------------------------------------
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'https://github.com/Shougo/unite.vim'
+NeoBundle 'https://github.com/ujihisa/unite-colorscheme'
 
 "--------------------------------------
 " Plugin for file exproler {{{2
 "--------------------------------------
 " ctrlp.vim
-NeoBundle 'git://github.com/kien/ctrlp.vim.git'
+NeoBundle 'https://github.com/kien/ctrlp.vim.git'
 if neobundle#is_installed('ctrlp.vim')
     let g:ctrlp_use_migemo = 1
     let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
@@ -43,23 +43,23 @@ if neobundle#is_installed('ctrlp.vim')
 endif
 
 " NERD Tree
-NeoBundle 'git://github.com/scrooloose/nerdtree.git'
+NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 
 "--------------------------------------
 " Plugin for git {{{2
 "--------------------------------------
-NeoBundle 'git://github.com/tpope/vim-fugitive.git'
-NeoBundle 'git://github.com/gregsexton/gitv.git'
+NeoBundle 'https://github.com/tpope/vim-fugitive.git'
+NeoBundle 'https://github.com/gregsexton/gitv.git'
 autocmd FileType git :setlocal foldlevel=99
 
 "--------------------------------------
 " Plugin for programing {{{2
 "--------------------------------------
 " vim-quickrun
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
+NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 
 " vim-indent-guides
-NeoBundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
+NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
@@ -69,22 +69,22 @@ let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
 
 " static analyzer
-NeoBundle 'git://github.com/scrooloose/syntastic.git'
+NeoBundle 'https://github.com/scrooloose/syntastic.git'
 
 " python 
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'git://github.com/alfredodeza/pytest.vim.git'
+NeoBundle 'https://github.com/nvie/vim-flake8'
+NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
 
 "--------------------------------------
 " Plugin for write text docment or novel {{{2
 "--------------------------------------
-NeoBundle 'git://github.com/fuenor/JpFormat.vim.git'
+NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
 "--------------------------------------
 " Plugin for buffer {{{2
 "--------------------------------------
 " buftabs
-NeoBundle 'vim-scripts/buftabs'
+NeoBundle 'https://github.com/vim-scripts/buftabs'
 
 let g:buftabs_only_basename = 1
 let g:buftabs_in_statusline = 1
@@ -174,7 +174,7 @@ set foldmethod=marker
 "--------------------------------------
 " Colorscheme {{{2
 "--------------------------------------
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'https://github.com/altercation/vim-colors-solarized'
 "syntax on
 set t_Co=256
 set background=dark
