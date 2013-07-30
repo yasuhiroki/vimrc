@@ -97,9 +97,6 @@ NeoBundle 'https://github.com/scrooloose/syntastic.git'
 NeoBundle 'https://github.com/nvie/vim-flake8'
 NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
 
-" vimshell
-NeoBundle "https://github.com/Shougo/vimshell.vim.git"
-
 "--------------------------------------
 " Plugin for write text docment or novel {{{2
 "--------------------------------------
