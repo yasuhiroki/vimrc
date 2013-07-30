@@ -21,6 +21,28 @@ NeoBundle 'https://github.com/Shougo/unite.vim'
 NeoBundle 'https://github.com/ujihisa/unite-colorscheme'
 
 "--------------------------------------
+" Plugin vim-proc {{{2
+"--------------------------------------
+" vimproc
+NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+"--------------------------------------
+" Plugin vim-shell {{{2
+"--------------------------------------
+NeoBundle "https://github.com/Shougo/vimshell.vim.git"
+
+"--------------------------------------
+" Plugin complcache {{{2
+"--------------------------------------
+NeoBundle "https://github.com/Shougo/neocomplcache.vim.git"
+
+
+"--------------------------------------
 " Plugin for file exproler {{{2
 "--------------------------------------
 " ctrlp.vim
@@ -74,6 +96,9 @@ NeoBundle 'https://github.com/scrooloose/syntastic.git'
 " python 
 NeoBundle 'https://github.com/nvie/vim-flake8'
 NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
+
+" vimshell
+NeoBundle "https://github.com/Shougo/vimshell.vim.git"
 
 "--------------------------------------
 " Plugin for write text docment or novel {{{2
@@ -139,6 +164,7 @@ noremap <Leader>g :JpCountPages 20 20 <Return>
 " Key mapping for buffer {{{2
 "--------------------------------------
 map <F3> <ESC>:bn<CR>
+map <F4> <ESC>:bp<CR>
 
 "--------------------------------------
 " Key mapping for comment out {{{2
