@@ -117,6 +117,10 @@ let g:buftabs_active_highlight_group="Visual"
 "-------------------------------------------------------------------------------
 set encoding=utf8
 set scrolloff=5
+set backup
+set swapfile
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
 
 "-------------------------------------------------------------------------------
 " Text, tab and indent settings {{{1

@@ -25,6 +25,21 @@ if [ ! -d "$HOME/$BUNDLE_DIR" ]; then
     exit 1
 fi
 
+
+if [ ! -d "$HOME/.vim/swap" ]; then
+    echo "====================================================="
+    echo " Create swap directory at HOME."
+    mkdir -p $HOME/.vim/swap
+    echo ""
+fi
+
+if [ ! -d "$HOME/.vim/backup" ]; then
+    echo "====================================================="
+    echo " Create backup directory at HOME."
+    mkdir -p $HOME/.vim/backup
+    echo ""
+fi
+
 if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
 #    echo "====================================================="
 #    echo " Update neobundle.vim."
