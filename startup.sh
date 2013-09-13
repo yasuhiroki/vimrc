@@ -93,6 +93,20 @@ COLORS_DIR=".vim/colors"
 #    popd
 #fi
 
+# setup template
+TEMPLATE_DIR=".vim/template"
+if [ ! -d "$HOME/$TEMPLATE_DIR" ]; then
+    echo "====================================================="
+    echo " Create template directory."
+    cp -r template $HOME/.vim/
+    echo ""
+else
+    echo "====================================================="
+    echo " Create template files."
+    cp template/* $HOME/$TEMPLATE_DIR
+    echo ""
+fi
+
 echo ""
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo " Finish start-up."

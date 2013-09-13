@@ -1,0 +1,136 @@
+#!/bin/bash
+
+#------------------------------------------------------------------
+#
+#
+# Autor: Yasuhiro Kiyota
+# Since: YYYY/MM/DD
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#------------------------------------------------------------------
+
+####================------------------------==================#####
+# Usage message
+##
+CMDNAME=`basename $0`
+
+USAGE_MESSAGE(){
+  echo "Usage: $CMDNAME [option] <arg1> <arg2>"
+  echo " <option>"
+  echo "  [ -a <opt arg>        : description]"
+  echo "  [ -b <opt arg>        : description]"
+  echo "  [ -c <opt arg>        : description]"
+  echo " <args>"
+  echo "  [ arg1     : description]"
+  echo "  [ arg2     : description]"
+  echo ""
+  exit 1
+}
+
+####================------------------------==================#####
+# Script message
+##
+Echo(){
+  echo "[$CMDNAME] $1"
+}
+
+Title_Echo(){
+    if [ "$2" ];then
+        title_length=$2
+    else
+        title_length=60
+    fi  
+    cnt=0
+    mark_line=""
+    while [ ${cnt} -lt ${title_length} ]
+    do  
+        mark_line="${mark_line}#"
+        cnt=`expr $cnt + 1`
+    done
+    echo "$mark_line"
+    echo "# $1"
+    echo "$mark_line"
+}
+
+####================------------------------==================#####
+# Failure Exit
+##
+FAIL(){
+  Echo "[ERROR] $1"
+  echo ""
+  exit 1
+}
+
+####================------------------------==================#####
+# Resolve option.
+##
+declare -A opt_flags
+opt_flags=(\
+["a"]=0 \
+["b"]=0 \
+["c"]=0 \
+)
+declare -A opt_values
+opt_values=(\
+["a"]="" \
+["b"]="" \
+["c"]="" \
+)
+while getopts a:b:c: OPT
+do
+  case $OPT in
+    "a")
+        opt_flags["a"]=1
+        opt_values["a"]=$OPTARG
+        ;;
+    "b")
+        opt_flags["b"]=1
+        opt_values["b"]=$OPTARG
+        ;;
+    "c")
+        opt_flags["c"]=1
+        opt_values["c"]=$OPTARG
+        ;;
+      *)
+        USAGE_MESSAGE
+  esac
+done
+shift `expr $OPTIND - 1`
+
+####================------------------------==================#####
+# Check argument
+##
+EXPECTED_ARGS_NUM=2
+if [ $# -ne $EXPECTED_ARGS_NUM ]; then
+  echo "[ERROR] arguments incorrect"
+  USAGE_MESSAGE
+  exit 1
+fi
+
+####================------------------------==================#####
+# Resolve script path.
+##
+PRG="$0"
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+PRGDIR=`dirname "$PRG"`
+
+####================------------------------==================#####
+# Environment Variables.
+##
+
+####================------------------------#####
+# 
+##
+
+####================#####
+# 
+##
+
+

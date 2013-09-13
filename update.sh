@@ -77,7 +77,21 @@ do
         cp ${_ft} $HOME/$FTPLUGIN_DIR/
     fi
 done
-echo ""
+
+# setup template
+TEMPLATE_DIR=".vim/template"
+if [ ! -d "$HOME/$TEMPLATE_DIR" ]; then
+    echo "====================================================="
+    echo " Update template directory."
+    cp -rf template $HOME/.vim/
+    echo ""
+else
+    echo "====================================================="
+    echo " Update template files."
+    cp template/* $HOME/$TEMPLATE_DIR
+    echo ""
+fi
+
 
 echo ""
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"

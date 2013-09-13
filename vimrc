@@ -2,7 +2,7 @@
 " Plugin Management {{{1
 "-------------------------------------------------------------------------------
 filetype off
-set nocompatible               " Be iMproved
+set nocompatible               " Be proved
 
 "--------------------------------------
 " NeoBundle Plugin {{{2
@@ -82,7 +82,6 @@ NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 
 " vim-indent-guides
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
-colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkRed ctermbg=darkgray
@@ -193,6 +192,11 @@ vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
 " Key mapping for vim preparing {{{2
 "--------------------------------------
 
+"--------------------------------------
+" Key mapping for virtual area yunk {{{2
+"--------------------------------------
+vnoremap * "zy:let @/ = @z<CR>n
+
 "-------------------------------------------------------------------------------
 " Other {{{1
 "-------------------------------------------------------------------------------
@@ -244,8 +248,26 @@ endfunction
 command! -nargs=1 -complete=custom,ListDisplayCreator -bar DisplayPrepare :call DisplayCreator(<q-args>)
 
 
+function! TemplateReader(mode)  "{{{2
+
+    if a:mode == "bash"
+        :0r ~/.vim/template/bash.tmp
+    endif
+
+endfunction
+
+function! ListTemplateReader(argv, cmd, cur)
+    return "
+        \bash\n
+        \"
+endfunction
+
+command! -nargs=1 -complete=custom,ListTemplateReader -bar TemplateReader :call TemplateReader(<q-args>)
+
+
 "-------------------------------------------------------------------------------
 " file type on {{{1
 "-------------------------------------------------------------------------------
 filetype plugin indent on
 filetype on
+
