@@ -37,10 +37,9 @@ NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
 NeoBundle "https://github.com/Shougo/vimshell.vim.git"
 
 "--------------------------------------
-" Plugin complcache {{{2
+" Plugin complete, to add auto completion {{{2
 "--------------------------------------
-NeoBundle "https://github.com/Shougo/neocomplcache.vim.git"
-
+NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
 
 "--------------------------------------
 " Plugin for file exproler {{{2
@@ -79,6 +78,9 @@ autocmd FileType git :setlocal foldlevel=99
 "--------------------------------------
 " vim-quickrun
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
+let g:quickrun_config = {
+    \ "*": {"runner": "vimproc"},
+    \ }
 
 " vim-indent-guides
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
@@ -95,6 +97,41 @@ NeoBundle 'https://github.com/scrooloose/syntastic.git'
 " python 
 NeoBundle 'https://github.com/nvie/vim-flake8'
 NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
+
+" Django
+NeoBundleLazy "lambdalisue/vim-django-support", {
+            \ "autoload": {
+            \   "filetypes": ["python", "python3", "djangohtml"]
+            \ }}
+" virtualenv
+NeoBundleLazy "jmcantrell/vim-virtualenv", {
+            \ "autoload": {
+            \   "filetypes": ["python", "python3", "djangohtml"]
+            \ }}
+
+NeoBundleLazy "davidhalter/jedi-vim", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"],
+      \ },
+      \ "build": {
+      \   "mac": "pip install jedi",
+      \   "unix": "pip install jedi",
+      \ }}
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+    autocmd FileType python setlocal omnifunc=jedi#completions
+
+    let g:jedi#auto_vim_configuration = 1
+
+    if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+    endif
+
+    let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+    let g:jedi#rename_command = '<Leader>R'
+    " gundoと被るため大文字に変更 (2013-06-24 10:00 追記）
+    let g:jedi#goto_command = '<Leader>G'
+endfunction
 
 "--------------------------------------
 " Plugin for write text docment or novel {{{2
@@ -165,6 +202,10 @@ noremap <Leader>g :JpCountPages 20 20 <Return>
 "--------------------------------------
 map <F3> <ESC>:bn<CR>
 map <F4> <ESC>:bp<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "--------------------------------------
 " Key mapping for comment out {{{2
