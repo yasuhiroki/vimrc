@@ -51,10 +51,10 @@ if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
 fi
 
 # setup .vimrc file
-if [ -f "$HOME/.vimrc" ]; then
+if [ -f "$HOME/_vimrc" ]; then
     echo "====================================================="
-    echo " Update .vimrc file."
-    cp vimrc $HOME/.vimrc
+    echo " Update _vimrc file."
+    cp vimrc $HOME/_vimrc
     echo ""
 fi
 
@@ -95,7 +95,7 @@ fi
 
 echo ""
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo " Finish start-up."
+echo " Finish update"
 echo "====================================================="
 echo ""
 
