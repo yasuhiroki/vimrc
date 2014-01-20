@@ -157,7 +157,7 @@ set tabstop=4
 set smarttab
 set expandtab
 set autoindent
-set textwidth=0
+autocmd FileType text setlocal textwidth=0
 
 " Display settings {{{2
 " ---------------------------------------------------------
