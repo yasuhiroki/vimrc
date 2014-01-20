@@ -72,6 +72,7 @@ let g:buftabs_active_highlight_group="Visual"
 
 " Plugin for evernote  {{{3
 NeoBundle 'https://github.com/kakkyz81/evervim.git'
+let g:evervim_devtoken='S=s215:U=193d24e:E=14a8fed4df8:C=143383c21fc:P=1cd:A=en-devtoken:V=2:H=5f6e6fd496d52b62cadea496ee35b06f'
 
 
 " Plugin for programing {{{2
@@ -156,6 +157,7 @@ set tabstop=4
 set smarttab
 set expandtab
 set autoindent
+set textwidth=0
 
 " Display settings {{{2
 " ---------------------------------------------------------
