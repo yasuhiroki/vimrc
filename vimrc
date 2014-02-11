@@ -77,9 +77,6 @@ let g:buftabs_active_highlight_group="Visual"
 NeoBundle 'https://github.com/tpope/vim-fugitive.git'
 NeoBundle 'https://github.com/gregsexton/gitv.git'
 autocmd FileType git :setlocal foldlevel=99
-" Plugin for evernote
-NeoBundle 'https://github.com/kakkyz81/evervim.git'
-let g:evervim_devtoken='S=s215:U=193d24e:E=14a8fed4df8:C=143383c21fc:P=1cd:A=en-devtoken:V=2:H=5f6e6fd496d52b62cadea496ee35b06f'
 
 " vim-quickrun
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
@@ -108,7 +105,7 @@ NeoBundleLazy "lambdalisue/vim-django-support", {
             \ "autoload": {
             \   "filetypes": ["python", "python3", "djangohtml"]
             \ }}
- virtualenv
+" virtualenv
 NeoBundleLazy "jmcantrell/vim-virtualenv", {
             \ "autoload": {
             \   "filetypes": ["python", "python3", "djangohtml"]
