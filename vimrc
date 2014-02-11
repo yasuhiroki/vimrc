@@ -77,6 +77,11 @@ let g:buftabs_active_highlight_group="Visual"
 NeoBundle 'https://github.com/tpope/vim-fugitive.git'
 NeoBundle 'https://github.com/gregsexton/gitv.git'
 autocmd FileType git :setlocal foldlevel=99
+" Plugin for evernote  {{{3
+NeoBundle 'https://github.com/kakkyz81/evervim.git'
+let g:evervim_devtoken='S=s215:U=193d24e:E=14a8fed4df8:C=143383c21fc:P=1cd:A=en-devtoken:V=2:H=5f6e6fd496d52b62cadea496ee35b06f'
+
+>>>>>>> 22179c51388ea0c74f1b663e1fb0b9fffd10dc6f
 
 " vim-quickrun
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
@@ -165,6 +170,7 @@ set tabstop=4
 set smarttab
 set expandtab
 set autoindent
+autocmd FileType text setlocal textwidth=0
 
 "------------------------------------------------------------------------------
 " Display settings
