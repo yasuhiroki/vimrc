@@ -193,7 +193,7 @@ NeoBundle 'https://github.com/altercation/vim-colors-solarized'
 "syntax on
 set t_Co=256
 set background=dark
-"colorscheme solarized
+colorscheme solarized
 let g:solarized_termcolors=256
 syntax enable
 "let g:solarized_termtrans=1
