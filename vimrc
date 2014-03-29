@@ -254,10 +254,14 @@ vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
 "------------------------------------------------------------------------------
 vnoremap * "zy:let @/ = @z<CR>n
 
+"------------------------------------------------------------------------------
+" Enable to read *.md file as markdown
+"------------------------------------------------------------------------------
+autocmd MyAutoGroup BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+
 " }}}
 "==============================================================================
-function! DisplayCreator(mode)
-    "{{{
+function! DisplayCreator(mode) "{{{
     if a:mode == "novel"
         :only
 
@@ -287,8 +291,7 @@ endfunction
 command! -nargs=1 -complete=custom,ListDisplayCreator -bar DisplayPrepare :call DisplayCreator(<q-args>)
 " }}}
 "==============================================================================
-function! TemplateReader(mode)
-" {{{ 
+function! TemplateReader(mode) " {{{ 
 
     if a:mode == "bash"
         :0r ~/.vim/template/bash.tmp
