@@ -18,6 +18,19 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " Plugin for interface
 "------------------------------------------------------------------------------
 NeoBundle 'https://github.com/Shougo/unite.vim'
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+"------------------------------------------------------------------------------
+" Unite : Key mapping
+"------------------------------------------------------------------------------
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+nnoremap [unite]u   :<C-u>Unite<Space>
+nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
+
 NeoBundle 'https://github.com/ujihisa/unite-colorscheme'
 
 " Plugin vim-proc
@@ -38,7 +51,6 @@ NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
 "------------------------------------------------------------------------------
 " Plugin for file exproler
 "------------------------------------------------------------------------------
-NeoBundle 'https://github.com/Shougo/unite.vim'
 " ctrlp.vim
 NeoBundle 'https://github.com/kien/ctrlp.vim.git'
 if neobundle#is_installed('ctrlp.vim')
@@ -57,6 +69,10 @@ if neobundle#is_installed('ctrlp.vim')
         set laststatus=2
     endfunc
 endif
+"------------------------------------------------------------------------------
+" <Ctrl> + p : Using ctrlp
+"------------------------------------------------------------------------------
+let g:ctrlp_map = '<c-p>'
 
 " NERD Tree
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
@@ -208,11 +224,6 @@ syntax enable
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 
 "------------------------------------------------------------------------------
-" <Ctrl> + p : Using ctrlp
-"------------------------------------------------------------------------------
-let g:ctrlp_map = '<c-p>'
-
-"------------------------------------------------------------------------------
 " If filetype is text or novela, <Leader>g : Count manuscript paper
 "------------------------------------------------------------------------------
 noremap <Leader>g :JpCountPages 20 20 <Return>
@@ -257,7 +268,7 @@ vnoremap * "zy:let @/ = @z<CR>n
 "------------------------------------------------------------------------------
 " Enable to read *.md file as markdown
 "------------------------------------------------------------------------------
-autocmd MyAutoGroup BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 
 " }}}
 "==============================================================================
