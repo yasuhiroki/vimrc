@@ -160,6 +160,9 @@ NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 " Plugin for evernote
 NeoBundle 'https://github.com/kakkyz81/evervim.git'
 
+" Xml
+NeoBundle 'https://github.com/mattn/emmet-vim'
+
 " }}}
 "==============================================================================
 " settings {{{
