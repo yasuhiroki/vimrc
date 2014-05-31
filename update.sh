@@ -34,27 +34,11 @@ Fail(){
     exit 1
 }
 
-Get_Program_Directory(){
-    PRG="$0"
-    while [ -h "$PRG" ] ; do
-        ls=`ls -ld "$PRG"`
-        link=`expr "$ls" : '.*-> \(.*\)$'`
-        if expr "$link" : '/.*' > /dev/null; then
-            PRG="$link"
-        else
-            PRG=`dirname "$PRG"`/"$link"
-        fi
-    done
-    PRGDIR=`dirname "$PRG"`
-    
-    echo $PRGDIR
-}
-
 # }}}
 ####================------------------------==================#####
 # Environment Varrables
 ####================------------------------==================#####
-script_dir=`Get_Program_Directory`
+script_dir=$(readlink -f $(dirname $0))
 line_cnt=100
 bundle_dir=".vim/bundle"
 ftplugin_dir=".vim/ftplugin"
@@ -107,12 +91,10 @@ else
 fi
 
 # setup .vimrc file
-if [ -f "$HOME/.vimrc" ]; then
-    Echo_Line 2
-    echo " Update .vimrc file."
-    cp vimrc $HOME/.vimrc
-    echo ""
-fi
+Echo_Line 2
+echo " Update .vimrc file."
+cp -f vimrc $HOME/.vimrc
+echo ""
 
 # setup ftplugin
 if [ ! -d "$HOME/$ftplugin_dir" ]; then
