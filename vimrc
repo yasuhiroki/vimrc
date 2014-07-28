@@ -163,6 +163,10 @@ NeoBundle 'https://github.com/kakkyz81/evervim.git'
 " Xml
 NeoBundle 'https://github.com/mattn/emmet-vim'
 
+" Text align
+NeoBundle 'h1mesuke/vim-alignta.git'
+vnoremap <silent> => :Align @= =><CR>
+
 " }}}
 "==============================================================================
 " settings {{{
