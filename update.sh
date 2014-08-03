@@ -97,7 +97,7 @@ CreateDir "$HOME/$bundle_dir"
 CreateDir "$HOME/.vim/swap"
 CreateDir "$HOME/.vim/backup"
 
-#NeoBundle
+NeoBundle
 
 # setup .vimrc file
 Echo_Line 2
