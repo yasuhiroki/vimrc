@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #------------------------------------------------------------------
 # Update vimrc and other configurations.
@@ -34,6 +34,46 @@ Fail(){
     exit 1
 }
 
+CreateDir(){
+    target=$1
+    if [ ! -d "$1" ]; then
+        Echo_Line 2
+        Echo "Create $target."
+        mkdir -p $1
+        echo ""
+    else
+        Echo "Already exits $target"
+    fi
+}
+
+NeoBundle(){
+    Echo_Line 2
+    Echo "neobundle.vim."
+    if [ ! -d "$HOME/$bundle_dir/neobundle.vim" ]; then
+        pushd $HOME/$bundle_dir
+        git clone https://github.com/Shougo/neobundle.vim.git
+        popd
+    else
+        pushd $HOME/$bundle_dir/neobundle.vim
+        git pull https://github.com/Shougo/neobundle.vim.git
+        popd
+    fi
+    echo ""
+}
+
+UpdateDir(){
+    src=$1
+    dist=$2
+
+    Echo_Line 2
+    Echo "Update $dist"
+    if [ ! -d $dist ]; then
+        mkdir -p $dist
+    fi
+    cp -rf $src/* $dist
+    echo ""
+}
+
 # }}}
 ####================------------------------==================#####
 # Environment Varrables
@@ -53,74 +93,20 @@ Echo_Line 1
 
 pushd $script_dir
 
-if [ ! -d "$HOME/$bundle_dir" ]; then
-    Echo_Line 2
-    echo " Create directory at HOME."
-    mkdir -p $HOME/$bundle_dir
-    echo ""
-fi
+CreateDir "$HOME/$bundle_dir"
+CreateDir "$HOME/.vim/swap"
+CreateDir "$HOME/.vim/backup"
 
-if [ ! -d "$HOME/.vim/swap" ]; then
-    Echo_Line 2
-    echo " Create swap directory at HOME."
-    mkdir -p $HOME/.vim/swap
-    echo ""
-fi
-
-if [ ! -d "$HOME/.vim/backup" ]; then
-    Echo_Line 2
-    echo " Create backup directory at HOME."
-    mkdir -p $HOME/.vim/backup
-    echo ""
-fi
-
-if [ ! -d "$HOME/$bundle_dir/neobundle.vim" ]; then
-    Echo_Line 2
-    echo " Get neobundle.vim."
-    pushd $HOME/$bundle_dir
-    git clone https://github.com/Shougo/neobundle.vim.git
-    popd
-    echo ""
-else
-    Echo_Line 2
-    echo " Update neobundle.vim."
-    pushd $HOME/$bundle_dir/neobundle.vim
-    git pull https://github.com/Shougo/neobundle.vim.git
-    popd
-    echo ""
-fi
+NeoBundle
 
 # setup .vimrc file
 Echo_Line 2
-echo " Update .vimrc file."
+Echo "Update .vimrc file."
 cp -f vimrc $HOME/.vimrc
 echo ""
 
-# setup ftplugin
-if [ ! -d "$HOME/$ftplugin_dir" ]; then
-    Echo_Line 2
-    echo " Update filetype directory."
-    cp -rf vim/ftplugin $HOME/.vim/$template_dir
-    echo ""
-else
-    Echo_Line 2
-    echo " Update filetype files."
-    cp vim/ftplugin/*.vim $HOME/$ftplugin_dir/
-    echo ""
-fi
-
-# setup template
-if [ ! -d "$HOME/$template_dir" ]; then
-    Echo_Line 2
-    echo " Update template directory."
-    cp -rf template $HOME/.vim/
-    echo ""
-else
-    Echo_Line 2
-    echo " Update template files."
-    cp template/* $HOME/$template_dir
-    echo ""
-fi
+UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
+UpdateDir "template" "$HOME/$template_dir"
 
 popd
 
@@ -130,4 +116,3 @@ Echo "Finish"
 Echo_Line 1
 echo ""
 # }}}
-####================------------------------==================#####
