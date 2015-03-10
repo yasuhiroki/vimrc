@@ -197,6 +197,7 @@ set wrap
 set number
 set title
 set ruler
+set hlsearch
 
 "------------------------------------------------------------------------------
 " status line settings
