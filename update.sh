@@ -50,13 +50,13 @@ NeoBundle(){
     Echo_Line 2
     Echo "neobundle.vim."
     if [ ! -d "$HOME/$bundle_dir/neobundle.vim" ]; then
-        pushd $HOME/$bundle_dir
+        cd $HOME/$bundle_dir
         git clone https://github.com/Shougo/neobundle.vim.git
-        popd
+        cd -
     else
-        pushd $HOME/$bundle_dir/neobundle.vim
+        cd $HOME/$bundle_dir/neobundle.vim
         git pull https://github.com/Shougo/neobundle.vim.git
-        popd
+        cd -
     fi
     echo ""
 }
@@ -91,7 +91,7 @@ Echo_Line 1
 Echo "Update vimrc and configurations"
 Echo_Line 1
 
-pushd $script_dir
+cd $script_dir
 
 CreateDir "$HOME/$bundle_dir"
 CreateDir "$HOME/.vim/swap"
@@ -108,7 +108,7 @@ echo ""
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
 
-popd
+cd -
 
 echo ""
 Echo_Line 1
