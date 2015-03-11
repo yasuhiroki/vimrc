@@ -78,11 +78,12 @@ UpdateDir(){
 ####================------------------------==================#####
 # Environment Varrables
 ####================------------------------==================#####
-script_dir=$(readlink -f $(dirname $0))
+script_dir=$(greadlink -f $(dirname $0))
 line_cnt=100
 bundle_dir=".vim/bundle"
 ftplugin_dir=".vim/ftplugin"
 template_dir=".vim/template"
+my_conf_dir=".vim/my_conf"
 
 ####================------------------------==================#####
 # Body {{{1
@@ -107,6 +108,7 @@ echo ""
 
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
+UpdateDir "my_conf" "$HOME/$my_conf_dir"
 
 cd -
 
