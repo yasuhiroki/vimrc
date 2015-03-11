@@ -4,6 +4,8 @@
 " Plugin Management
 "  Using NeoBundle to magnage plugins.
 "------------------------------------------------------------------------------
+"
+" NeoBundle {{{1
 filetype off
 set nocompatible               " Be proved
 if !1 | finish | endif
@@ -39,6 +41,8 @@ NeoBundleCheck
 
 runtime! my_conf/*.vim
 
+" }}}
+
 " Plugins {{{1
 "------------------------------------------------------------------------------
 " Plugin for interface
@@ -55,22 +59,6 @@ NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
 " Plugin vim-shell
 NeoBundle "https://github.com/Shougo/vimshell.vim.git"
 
-" Plugin complete, to add auto completion
-NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
-NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
-
-"------------------------------------------------------------------------------
-" Plugin for file exproler
-"------------------------------------------------------------------------------
-" NERD Tree
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
-
-" buftabs
-NeoBundle 'https://github.com/vim-scripts/buftabs'
-let g:buftabs_only_basename = 1
-let g:buftabs_in_statusline = 1
-let g:buftabs_active_highlight_group="Visual"
-
 "------------------------------------------------------------------------------
 " Plugin for programing
 "------------------------------------------------------------------------------
@@ -82,6 +70,9 @@ let g:quickrun_config = {
 
 " static analyzer
 NeoBundle 'https://github.com/scrooloose/syntastic.git'
+
+" endwise
+NeoBundle 'https://github.com/tpope/vim-endwise'
 
 "------------------------------------------------------------------------------
 " Plugin for write text docment
