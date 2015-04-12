@@ -1,29 +1,39 @@
-"-------------------------------------------------------------------------------
-" Plugin Management {{{1
-"-------------------------------------------------------------------------------
+"==============================================================================
+" FILE: vimrc
+"==============================================================================
+" Plugin Management
+"  Using NeoBundle to magnage plugins.
+"------------------------------------------------------------------------------
 filetype off
 set nocompatible               " Be proved
 
-"--------------------------------------
-" NeoBundle Plugin {{{2
-"--------------------------------------
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-
-"--------------------------------------
-" Plugin for unite interface {{{2
-"--------------------------------------
+" Plugins {{{1
+"------------------------------------------------------------------------------
+" Plugin for interface
+"------------------------------------------------------------------------------
 NeoBundle 'https://github.com/Shougo/unite.vim'
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+"------------------------------------------------------------------------------
+" Unite : Key mapping
+"------------------------------------------------------------------------------
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+nnoremap [unite]u   :<C-u>Unite<Space>
+nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
+
 NeoBundle 'https://github.com/ujihisa/unite-colorscheme'
 
-"--------------------------------------
-" Plugin vim-proc {{{2
-"--------------------------------------
-" vimproc
+" Plugin vim-proc
 NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -31,19 +41,16 @@ NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
       \    },
       \ }
 
-"--------------------------------------
-" Plugin vim-shell {{{2
-"--------------------------------------
+" Plugin vim-shell
 NeoBundle "https://github.com/Shougo/vimshell.vim.git"
 
-"--------------------------------------
-" Plugin complete, to add auto completion {{{2
-"--------------------------------------
+" Plugin complete, to add auto completion
 NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
+NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
 
-"--------------------------------------
-" Plugin for file exproler {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Plugin for file exproler
+"------------------------------------------------------------------------------
 " ctrlp.vim
 NeoBundle 'https://github.com/kien/ctrlp.vim.git'
 if neobundle#is_installed('ctrlp.vim')
@@ -62,20 +69,31 @@ if neobundle#is_installed('ctrlp.vim')
         set laststatus=2
     endfunc
 endif
+"------------------------------------------------------------------------------
+" <Ctrl> + p : Using ctrlp
+"------------------------------------------------------------------------------
+let g:ctrlp_map = '<c-p>'
 
 " NERD Tree
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 
-"--------------------------------------
-" Plugin for git {{{2
-"--------------------------------------
+" Plugin for buffer
+" buftabs
+NeoBundle 'https://github.com/vim-scripts/buftabs'
+
+let g:buftabs_only_basename = 1
+let g:buftabs_in_statusline = 1
+let g:buftabs_active_highlight_group="Visual"
+
+"------------------------------------------------------------------------------
+" Plugin for programing
+"------------------------------------------------------------------------------
+"
+" Plugin for git
 NeoBundle 'https://github.com/tpope/vim-fugitive.git'
 NeoBundle 'https://github.com/gregsexton/gitv.git'
 autocmd FileType git :setlocal foldlevel=99
 
-"--------------------------------------
-" Plugin for programing {{{2
-"--------------------------------------
 " vim-quickrun
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 let g:quickrun_config = {
@@ -94,7 +112,7 @@ let g:indent_guides_guide_size = 1
 " static analyzer
 NeoBundle 'https://github.com/scrooloose/syntastic.git'
 
-" python 
+" python
 NeoBundle 'https://github.com/nvie/vim-flake8'
 NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
 
@@ -133,24 +151,28 @@ function! s:hooks.on_source(bundle)
     let g:jedi#goto_command = '<Leader>G'
 endfunction
 
-"--------------------------------------
-" Plugin for write text docment or novel {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Plugin for write text docment
+"------------------------------------------------------------------------------
+" Genko pages counter
 NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
-"--------------------------------------
-" Plugin for buffer {{{2
-"--------------------------------------
-" buftabs
-NeoBundle 'https://github.com/vim-scripts/buftabs'
+" Plugin for evernote
+NeoBundle 'https://github.com/kakkyz81/evervim.git'
 
-let g:buftabs_only_basename = 1
-let g:buftabs_in_statusline = 1
-let g:buftabs_active_highlight_group="Visual"
+" Xml
+NeoBundle 'https://github.com/mattn/emmet-vim'
 
-"-------------------------------------------------------------------------------
-" basic settings {{{1
-"-------------------------------------------------------------------------------
+" Text align
+NeoBundle 'h1mesuke/vim-alignta.git'
+vnoremap <silent> => :Align @= =><CR>
+
+" }}}
+"==============================================================================
+" settings {{{
+"------------------------------------------------------------------------------
+" basic settings
+"------------------------------------------------------------------------------
 set encoding=utf8
 set scrolloff=5
 set backup
@@ -158,48 +180,64 @@ set swapfile
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 
-"-------------------------------------------------------------------------------
-" Text, tab and indent settings {{{1
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
+" Text, tab and indent settings
+"------------------------------------------------------------------------------
 set shiftwidth=4
 set tabstop=4
 set smarttab
 set expandtab
 set autoindent
+autocmd FileType text setlocal textwidth=0
 
-"-------------------------------------------------------------------------------
-" Display settings {{{1
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
+" Display settings
+"------------------------------------------------------------------------------
 set wrap
 set number
 set title
 set ruler
 
-
-"-------------------------------------------------------------------------------
-" status line settings {{{1
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
+" status line settings
+"------------------------------------------------------------------------------
 set statusline=%=\ [%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 set laststatus=2
 
-"-------------------------------------------------------------------------------
-" Key mapping {{{1
-"-------------------------------------------------------------------------------
-"--------------------------------------
-" Key mapping for plugin {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Other
+"------------------------------------------------------------------------------
+set foldmethod=marker
+
+"------------------------------------------------------------------------------
+" Colorscheme
+"------------------------------------------------------------------------------
+NeoBundle 'https://github.com/altercation/vim-colors-solarized'
+"syntax on
+set t_Co=256
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+syntax enable
+"let g:solarized_termtrans=1
+
+" }}}
+"==============================================================================
+" Key mapping {{{
+"------------------------------------------------------------------------------
+" Key mapping for plugin
+"------------------------------------------------------------------------------
 " <Space>. : open .vimrc
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 
-" <Ctrl> + p : Using ctrlp
-let g:ctrlp_map = '<c-p>'
-
+"------------------------------------------------------------------------------
 " If filetype is text or novela, <Leader>g : Count manuscript paper
+"------------------------------------------------------------------------------
 noremap <Leader>g :JpCountPages 20 20 <Return>
 
-"--------------------------------------
-" Key mapping for buffer {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Key mapping for buffer
+"------------------------------------------------------------------------------
 map <F3> <ESC>:bn<CR>
 map <F4> <ESC>:bp<CR>
 nnoremap <C-h> <C-w>h
@@ -207,9 +245,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"--------------------------------------
-" Key mapping for comment out {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Key mapping for comment out
+"------------------------------------------------------------------------------
 " lhs comments
 vmap ,# :s/^/#/<CR>:nohlsearch<CR>
 vmap ,/ :s/^/\/\//<CR>:nohlsearch<CR>
@@ -229,37 +267,19 @@ vmap ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohlsearch<CR>
 vmap ,b v`<I<CR><esc>k0i/*<ESC>`>j0i*/<CR><esc><ESC>
 vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
 
-"--------------------------------------
-" Key mapping for vim preparing {{{2
-"--------------------------------------
-
-"--------------------------------------
-" Key mapping for virtual area yunk {{{2
-"--------------------------------------
+"------------------------------------------------------------------------------
+" Key mapping for virtual area yunk
+"------------------------------------------------------------------------------
 vnoremap * "zy:let @/ = @z<CR>n
 
-"-------------------------------------------------------------------------------
-" Other {{{1
-"-------------------------------------------------------------------------------
-set foldmethod=marker
+"------------------------------------------------------------------------------
+" Enable to read *.md file as markdown
+"------------------------------------------------------------------------------
+autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 
-"--------------------------------------
-" Colorscheme {{{2
-"--------------------------------------
-NeoBundle 'https://github.com/altercation/vim-colors-solarized'
-"syntax on
-set t_Co=256
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-syntax enable
-"let g:solarized_termtrans=1
-
-"-------------------------------------------------------------------------------
-" Origin Tools {{{1
-"-------------------------------------------------------------------------------
-function! DisplayCreator(mode)  "{{{2
-
+" }}}
+"==============================================================================
+function! DisplayCreator(mode) "{{{
     if a:mode == "novel"
         :only
 
@@ -287,9 +307,9 @@ function! ListDisplayCreator(argv, cmd, cur)
 endfunction
 
 command! -nargs=1 -complete=custom,ListDisplayCreator -bar DisplayPrepare :call DisplayCreator(<q-args>)
-
-
-function! TemplateReader(mode)  "{{{2
+" }}}
+"==============================================================================
+function! TemplateReader(mode) " {{{ 
 
     if a:mode == "bash"
         :0r ~/.vim/template/bash.tmp
@@ -304,11 +324,13 @@ function! ListTemplateReader(argv, cmd, cur)
 endfunction
 
 command! -nargs=1 -complete=custom,ListTemplateReader -bar TemplateReader :call TemplateReader(<q-args>)
+" }}}
+"==============================================================================
 
-
-"-------------------------------------------------------------------------------
-" file type on {{{1
+"==============================================================================
+" file type on
 "-------------------------------------------------------------------------------
 filetype plugin indent on
 filetype on
+"==============================================================================
 

@@ -1,136 +1,95 @@
 #!/bin/bash
 
 #------------------------------------------------------------------
+# Title
 #
-#
-# Autor: Yasuhiro Kiyota
-# Since: YYYY/MM/DD
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #------------------------------------------------------------------
 
 ####================------------------------==================#####
-# Usage message
-##
+# Usage message {{{
+####================------------------------==================#####
 CMDNAME=`basename $0`
-
-USAGE_MESSAGE(){
-  echo "Usage: $CMDNAME [option] <arg1> <arg2>"
-  echo " <option>"
-  echo "  [ -a <opt arg>        : description]"
-  echo "  [ -b <opt arg>        : description]"
-  echo "  [ -c <opt arg>        : description]"
-  echo " <args>"
-  echo "  [ arg1     : description]"
-  echo "  [ arg2     : description]"
-  echo ""
-  exit 1
+Usage(){
+    echo "Usage: $CMDNAME [-ah] <arg1>"
+    echo " <option>"
+    echo "    -h                  : Show this help. "
+    echo "    -a <opt arg>        : description"
+    echo " <args>"
+    echo "    arg1                : description"
+    echo " <example>"
+    echo "  $CMDNAME -a exam"
+    echo ""
 }
 
+# }}}
 ####================------------------------==================#####
-# Script message
-##
+# Functions {{{
+####================------------------------==================#####
 Echo(){
-  echo "[$CMDNAME] $1"
+    echo "[$CMDNAME] $1"
 }
 
-Title_Echo(){
-    if [ "$2" ];then
-        title_length=$2
+Echo_Line(){
+    if [ "$1" = 1 ];then
+        mark_line="################################################################################"
+    elif [ "$1" = 2 ];then
+        mark_line="================================================================================"
+    elif [ "$1" = 3 ];then
+        mark_line="--------------------------------------------------------------------------------"
     else
-        title_length=60
+        mark_line="********************************************************************************"
     fi  
-    cnt=0
-    mark_line=""
-    while [ ${cnt} -lt ${title_length} ]
-    do  
-        mark_line="${mark_line}#"
-        cnt=`expr $cnt + 1`
-    done
-    echo "$mark_line"
-    echo "# $1"
+
     echo "$mark_line"
 }
 
-####================------------------------==================#####
-# Failure Exit
-##
-FAIL(){
-  Echo "[ERROR] $1"
-  echo ""
-  exit 1
+Fail(){
+    Echo "[ERROR] $1"
+    echo ""
+    exit 1
 }
 
+# }}}
 ####================------------------------==================#####
-# Resolve option.
-##
-declare -A opt_flags
-opt_flags=(\
-["a"]=0 \
-["b"]=0 \
-["c"]=0 \
-)
-declare -A opt_values
-opt_values=(\
-["a"]="" \
-["b"]="" \
-["c"]="" \
-)
-while getopts a:b:c: OPT
+# Resolve option. {{{
+####================------------------------==================#####
+while getopts a:h OPT
 do
-  case $OPT in
-    "a")
-        opt_flags["a"]=1
-        opt_values["a"]=$OPTARG
-        ;;
-    "b")
-        opt_flags["b"]=1
-        opt_values["b"]=$OPTARG
-        ;;
-    "c")
-        opt_flags["c"]=1
-        opt_values["c"]=$OPTARG
-        ;;
-      *)
-        USAGE_MESSAGE
-  esac
+    case $OPT in
+        "a")
+            A_VAL=$OPTARG
+            ;;
+        "h")
+            Usage
+            exit 1
+            ;;
+        "*")
+            Usage
+            exit 1
+    esac
 done
 shift `expr $OPTIND - 1`
 
+# }}}
 ####================------------------------==================#####
 # Check argument
-##
-EXPECTED_ARGS_NUM=2
+####================------------------------==================#####
+EXPECTED_ARGS_NUM=1
 if [ $# -ne $EXPECTED_ARGS_NUM ]; then
-  echo "[ERROR] arguments incorrect"
-  USAGE_MESSAGE
-  exit 1
+    Usage
+    Fail "arguments incorrect"
 fi
 
 ####================------------------------==================#####
-# Resolve script path.
-##
-PRG="$0"
-while [ -h "$PRG" ] ; do
-  ls=`ls -ld "$PRG"`
-  link=`expr "$ls" : '.*-> \(.*\)$'`
-  if expr "$link" : '/.*' > /dev/null; then
-    PRG="$link"
-  else
-    PRG=`dirname "$PRG"`/"$link"
-  fi
-done
-PRGDIR=`dirname "$PRG"`
+# Environment Varrables
+####================------------------------==================#####
+script_dir=$(readlink -f $(dirname $0))
+line_cnt=100
 
 ####================------------------------==================#####
-# Environment Variables.
-##
-
-####================------------------------#####
-# 
-##
-
-####================#####
-# 
-##
-
-
+# Body
+####================------------------------==================#####
+Echo_Line 1
+Echo "Script"
+Echo_Line 1

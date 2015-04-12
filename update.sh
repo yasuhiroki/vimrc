@@ -1,101 +1,118 @@
-#!/bin/bash
+#!/bin/bash -x
 
-# Start-up for vim settings
-if [ ! -f 'vimrc' ] \
-    && [ ! -d 'vim' ] \
-    && [ ! -f 'startup.sh' ]; then
+#------------------------------------------------------------------
+# Update vimrc and other configurations.
+#
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#------------------------------------------------------------------
 
+CMDNAME=`basename $0`
+####================------------------------==================#####
+# Functions {{{
+####================------------------------==================#####
+Echo(){
+    echo "[$CMDNAME] $1"
+}
+
+Echo_Line(){
+    if [ "$1" = 1 ];then
+        mark_line="################################################################################"
+    elif [ "$1" = 2 ];then
+        mark_line="================================================================================"
+    elif [ "$1" = 3 ];then
+        mark_line="--------------------------------------------------------------------------------"
+    else
+        mark_line="********************************************************************************"
+    fi  
+
+    echo "$mark_line"
+}
+
+Fail(){
+    Echo "[ERROR] $1"
     echo ""
-    echo "Plase execute in vimrc directory that you ran git clone."
     exit 1
-fi
+}
 
-PRGDIR=`pwd`
-echo ""
-echo "====================================================="
-echo " This is update tool."
-echo " Execution in $PRGDIR."
-echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+CreateDir(){
+    target=$1
+    if [ ! -d "$1" ]; then
+        Echo_Line 2
+        Echo "Create $target."
+        mkdir -p $1
+        echo ""
+    else
+        Echo "Already exits $target"
+    fi
+}
 
-# git clone NeoBundle on ~/.vim/bundle
-BUNDLE_DIR=".vim/bundle"
-if [ ! -d "$HOME/$BUNDLE_DIR" ]; then
-    echo "[Error] Could not Found .vim/bundle directory."
+NeoBundle(){
+    Echo_Line 2
+    Echo "neobundle.vim."
+    if [ ! -d "$HOME/$bundle_dir/neobundle.vim" ]; then
+        pushd $HOME/$bundle_dir
+        git clone https://github.com/Shougo/neobundle.vim.git
+        popd
+    else
+        pushd $HOME/$bundle_dir/neobundle.vim
+        git pull https://github.com/Shougo/neobundle.vim.git
+        popd
+    fi
     echo ""
-    exit 1
-fi
+}
 
+UpdateDir(){
+    src=$1
+    dist=$2
 
-if [ ! -d "$HOME/.vim/swap" ]; then
-    echo "====================================================="
-    echo " Create swap directory at HOME."
-    mkdir -p $HOME/.vim/swap
+    Echo_Line 2
+    Echo "Update $dist"
+    if [ ! -d $dist ]; then
+        mkdir -p $dist
+    fi
+    cp -rf $src/* $dist
     echo ""
-fi
+}
 
-if [ ! -d "$HOME/.vim/backup" ]; then
-    echo "====================================================="
-    echo " Create backup directory at HOME."
-    mkdir -p $HOME/.vim/backup
-    echo ""
-fi
+# }}}
+####================------------------------==================#####
+# Environment Varrables
+####================------------------------==================#####
+script_dir=$(readlink -f $(dirname $0))
+line_cnt=100
+bundle_dir=".vim/bundle"
+ftplugin_dir=".vim/ftplugin"
+template_dir=".vim/template"
 
-if [ -d "$HOME/$BUNDLE_DIR/neobundle.vim" ]; then
-#    echo "====================================================="
-#    echo " Update neobundle.vim."
-#    pushd $HOME/$BUNDLE_DIR
-#    git pull https://github.com/Shougo/neobundle.vim.git
-#    popd
-    echo "[NOTICE] Skip update neobundle.vim"
-    echo ""
-fi
+####================------------------------==================#####
+# Body {{{1
+####================------------------------==================#####
+Echo_Line 1
+Echo "Update vimrc and configurations"
+Echo_Line 1
+
+pushd $script_dir
+
+CreateDir "$HOME/$bundle_dir"
+CreateDir "$HOME/.vim/swap"
+CreateDir "$HOME/.vim/backup"
+
+NeoBundle
 
 # setup .vimrc file
-if [ -f "$HOME/.vimrc" ]; then
-    echo "====================================================="
-    echo " Update .vimrc file."
-    cp vimrc $HOME/.vimrc
-    echo ""
-fi
-
-# setup ftplugin
-FTPLUGIN_DIR=".vim/ftplugin"
-if [ ! -d "$HOME/$FTPLUGIN_DIR" ]; then
-    echo "[Error] Could not found ftplugin directory."
-    echo ""
-fi
-
-for _ft in vim/ftplugin/*.vim
-do
-    if [ -f "$HOME/$FTPLUGIN_DIR/${_ft##*/}" ];then
-        echo "====================================================="
-        echo " Update filetype ${_ft##*/}."
-        cp ${_ft} $HOME/$FTPLUGIN_DIR/
-    else
-        echo "====================================================="
-        echo " Add filetype ${_ft##*/}."
-        cp ${_ft} $HOME/$FTPLUGIN_DIR/
-    fi
-done
-
-# setup template
-TEMPLATE_DIR=".vim/template"
-if [ ! -d "$HOME/$TEMPLATE_DIR" ]; then
-    echo "====================================================="
-    echo " Update template directory."
-    cp -rf template $HOME/.vim/
-    echo ""
-else
-    echo "====================================================="
-    echo " Update template files."
-    cp template/* $HOME/$TEMPLATE_DIR
-    echo ""
-fi
-
-
-echo ""
-echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo " Finish start-up."
-echo "====================================================="
+Echo_Line 2
+Echo "Update .vimrc file."
+cp -f vimrc $HOME/.vimrc
 echo ""
 
+UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
+UpdateDir "template" "$HOME/$template_dir"
+
+popd
+
+echo ""
+Echo_Line 1
+Echo "Finish"
+Echo_Line 1
+echo ""
+# }}}
