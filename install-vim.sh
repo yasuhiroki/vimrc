@@ -5,7 +5,7 @@ apt install mercurial gettext libncurses5-dev libacl1-dev libgpm-dev lua5.2 libl
 
 vim_src_dir="vim-src"
 [ ! -d ${vim_src_dir} ] && hg clone https://vim.googlecode.com/hg/ ${vim_src_dir}
-cd ${vim_src-dir}/src
+cd ${vim_src_dir}/src
 ./configure  --with-features=huge --enable-gui=gnome2 --enable-perlinterp --enable-pythoninterp --enable-python3interp --enable-rubyinterp --enable-luainterp --with-luajit --enable-fail-if-missing
 make
 make install
