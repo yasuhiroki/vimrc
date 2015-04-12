@@ -4,39 +4,54 @@
 " Plugin Management
 "  Using NeoBundle to magnage plugins.
 "------------------------------------------------------------------------------
+"
+" NeoBundle {{{1
 filetype off
 set nocompatible               " Be proved
+if !1 | finish | endif
 
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+runtime! my_conf/*.vim
+
+" }}}
 
 " Plugins {{{1
 "------------------------------------------------------------------------------
 " Plugin for interface
 "------------------------------------------------------------------------------
-NeoBundle 'https://github.com/Shougo/unite.vim'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-"------------------------------------------------------------------------------
-" Unite : Key mapping
-"------------------------------------------------------------------------------
-nnoremap [unite]    <Nop>
-nmap     <Space>u [unite]
-nnoremap [unite]u   :<C-u>Unite<Space>
-nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
-
-NeoBundle 'https://github.com/ujihisa/unite-colorscheme'
-
 " Plugin vim-proc
 NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
+	  \     'mac' : 'make -f make_mac.mak',
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
@@ -44,112 +59,20 @@ NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
 " Plugin vim-shell
 NeoBundle "https://github.com/Shougo/vimshell.vim.git"
 
-" Plugin complete, to add auto completion
-NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
-NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
-
-"------------------------------------------------------------------------------
-" Plugin for file exproler
-"------------------------------------------------------------------------------
-" ctrlp.vim
-NeoBundle 'https://github.com/kien/ctrlp.vim.git'
-if neobundle#is_installed('ctrlp.vim')
-    let g:ctrlp_use_migemo = 1
-    let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
-    let g:ctrlp_mruf_max            = 500 " Max memorable mru
-    let g:ctrlp_open_new_file       = 1   " Open new file as tab
-    let g:ctrlp_buffer_func = {
-        \ 'enter': 'Ctrlp_laststatus_0',
-        \ 'exit':  'Ctrlp_laststatus_2',
-        \ }
-    func! Ctrlp_laststatus_0()
-        set laststatus=0
-    endfunc
-    func! Ctrlp_laststatus_2()
-        set laststatus=2
-    endfunc
-endif
-"------------------------------------------------------------------------------
-" <Ctrl> + p : Using ctrlp
-"------------------------------------------------------------------------------
-let g:ctrlp_map = '<c-p>'
-
-" NERD Tree
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
-
-" Plugin for buffer
-" buftabs
-NeoBundle 'https://github.com/vim-scripts/buftabs'
-
-let g:buftabs_only_basename = 1
-let g:buftabs_in_statusline = 1
-let g:buftabs_active_highlight_group="Visual"
-
 "------------------------------------------------------------------------------
 " Plugin for programing
 "------------------------------------------------------------------------------
-"
-" Plugin for git
-NeoBundle 'https://github.com/tpope/vim-fugitive.git'
-NeoBundle 'https://github.com/gregsexton/gitv.git'
-autocmd FileType git :setlocal foldlevel=99
-
 " vim-quickrun
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 let g:quickrun_config = {
     \ "*": {"runner": "vimproc"},
     \ }
 
-" vim-indent-guides
-NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkRed ctermbg=darkgray
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  guibg=DarkGreen ctermbg=darkcyan
-let g:indent_guides_color_change_percent = 30
-let g:indent_guides_guide_size = 1
-
 " static analyzer
 NeoBundle 'https://github.com/scrooloose/syntastic.git'
 
-" python
-NeoBundle 'https://github.com/nvie/vim-flake8'
-NeoBundle 'https://github.com/alfredodeza/pytest.vim.git'
-
-" Django
-NeoBundleLazy "lambdalisue/vim-django-support", {
-            \ "autoload": {
-            \   "filetypes": ["python", "python3", "djangohtml"]
-            \ }}
-" virtualenv
-NeoBundleLazy "jmcantrell/vim-virtualenv", {
-            \ "autoload": {
-            \   "filetypes": ["python", "python3", "djangohtml"]
-            \ }}
-
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"],
-      \ },
-      \ "build": {
-      \   "mac": "pip install jedi",
-      \   "unix": "pip install jedi",
-      \ }}
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
-    autocmd FileType python setlocal omnifunc=jedi#completions
-
-    let g:jedi#auto_vim_configuration = 1
-
-    if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-    endif
-
-    let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-    let g:jedi#rename_command = '<Leader>R'
-    " gundoと被るため大文字に変更 (2013-06-24 10:00 追記）
-    let g:jedi#goto_command = '<Leader>G'
-endfunction
+" endwise
+NeoBundle 'https://github.com/tpope/vim-endwise'
 
 "------------------------------------------------------------------------------
 " Plugin for write text docment
@@ -157,15 +80,6 @@ endfunction
 " Genko pages counter
 NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
-" Plugin for evernote
-NeoBundle 'https://github.com/kakkyz81/evervim.git'
-
-" Xml
-NeoBundle 'https://github.com/mattn/emmet-vim'
-
-" Text align
-NeoBundle 'h1mesuke/vim-alignta.git'
-vnoremap <silent> => :Align @= =><CR>
 
 " }}}
 "==============================================================================
@@ -197,6 +111,7 @@ set wrap
 set number
 set title
 set ruler
+set hlsearch
 
 "------------------------------------------------------------------------------
 " status line settings
@@ -208,18 +123,6 @@ set laststatus=2
 " Other
 "------------------------------------------------------------------------------
 set foldmethod=marker
-
-"------------------------------------------------------------------------------
-" Colorscheme
-"------------------------------------------------------------------------------
-NeoBundle 'https://github.com/altercation/vim-colors-solarized'
-"syntax on
-set t_Co=256
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-syntax enable
-"let g:solarized_termtrans=1
 
 " }}}
 "==============================================================================
