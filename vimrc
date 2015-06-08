@@ -39,11 +39,13 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-runtime! my_conf/*.vim
-
 " }}}
 
 " Plugins {{{1
+
+call neobundle#begin()
+    runtime! my_conf/*.vim
+
 "------------------------------------------------------------------------------
 " Plugin for interface
 "------------------------------------------------------------------------------
@@ -80,6 +82,7 @@ NeoBundle 'https://github.com/tpope/vim-endwise'
 " Genko pages counter
 NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
+call neobundle#end()
 
 " }}}
 "==============================================================================
@@ -107,6 +110,7 @@ autocmd FileType text setlocal textwidth=0
 "------------------------------------------------------------------------------
 " Display settings
 "------------------------------------------------------------------------------
+colorscheme solarized
 set wrap
 set number
 set title
