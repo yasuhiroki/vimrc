@@ -1,6 +1,7 @@
 " Plugin complete, to add auto completion
 NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
-NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
+"NeoBundle "https://github.com/Shougo/neosnippet.vim.git"
+"NeoBundle "https://github.com/Shougo/neosnippet-snippets"
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0

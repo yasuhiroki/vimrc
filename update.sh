@@ -78,10 +78,10 @@ UpdateDir(){
 ####================------------------------==================#####
 # Environment Varrables
 ####================------------------------==================#####
-if type readlink >> /dev/null 2>&1; then
-    script_dir=$(readlink -f $(dirname $0))
-else
+if type greadlink >> /dev/null 2>&1; then
     script_dir=$(greadlink -f $(dirname $0))
+else
+    script_dir=$(readlink -f $(dirname $0))
 fi
 line_cnt=100
 bundle_dir=".vim/bundle"

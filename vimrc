@@ -44,7 +44,7 @@ NeoBundleCheck
 " Plugins {{{1
 
 call neobundle#begin()
-    runtime! my_conf/*.vim
+runtime! my_conf/*.vim
 
 "------------------------------------------------------------------------------
 " Plugin for interface
@@ -83,6 +83,13 @@ NeoBundle 'https://github.com/tpope/vim-endwise'
 NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
 
 call neobundle#end()
+
+syntax enable
+set t_Co=256
+set background=light
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
 
 " }}}
 "==============================================================================
@@ -222,3 +229,10 @@ filetype plugin indent on
 filetype on
 "==============================================================================
 
+"==============================================================================
+" Optional
+"-------------------------------------------------------------------------------
+if has('mac')
+    set imdisable
+endif
+"==============================================================================

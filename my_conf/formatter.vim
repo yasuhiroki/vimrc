@@ -18,3 +18,5 @@ NeoBundle 'h1mesuke/vim-alignta.git'
 vnoremap <silent> => :Align @= =><CR>
 
 NeoBundle 'junegunn/vim-easy-align.git'
+
+NeoBundle 'mattn/emmet-vim/'
