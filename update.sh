@@ -88,6 +88,7 @@ bundle_dir=".vim/bundle"
 ftplugin_dir=".vim/ftplugin"
 template_dir=".vim/template"
 my_conf_dir=".vim/my_conf"
+ftdetect_dir=".vim/ftdetect"
 
 ####================------------------------==================#####
 # Body {{{1
@@ -112,6 +113,7 @@ echo ""
 
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
+UpdateDir "ftdetect" "$HOME/$ftdetect_dir"
 UpdateDir "my_conf" "$HOME/$my_conf_dir"
 
 cd -
