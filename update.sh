@@ -113,7 +113,7 @@ echo ""
 
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
-UpdateDir "ftdetect" "$HOME/$ftdetect_dir"
+UpdateDir "vim/ftdetect" "$HOME/$ftdetect_dir"
 UpdateDir "my_conf" "$HOME/$my_conf_dir"
 
 cd -
