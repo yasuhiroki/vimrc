@@ -54,14 +54,14 @@ runtime! my_conf/*.vim
 " ### Common {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " #### vim-quickrun {{{4
-NeoBundle 'https://github.com/thinca/vim-quickrun.git'
+NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {
             \ "_": {"runner": "vimproc"},
             \ }
 " Stop quickrun by <C-c>
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
-NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
+NeoBundle "Shougo/vimproc.vim", {
             \ 'build' : {
             \     'windows' : 'make -f make_mingw32.mak',
             \     'mac' : 'make -f make_mac.mak',
@@ -70,13 +70,13 @@ NeoBundle "https://github.com/Shougo/vimproc.vim.git", {
             \ }
 
 "4}}}
-" #### Shougo/neocomplete {{{4
+" #### Shougo/neoXXX {{{4
 " Mac OS X setting
 if has("mac")
   " lua is installed by homebrew
   set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
 end
-NeoBundle "https://github.com/Shougo/neocomplete.vim.git"
+NeoBundle "Shougo/neocomplete.vim"
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -129,16 +129,44 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
 "4}}}
 " #### Buffer {{{4
-NeoBundle 'https://github.com/vim-scripts/buftabs'
+NeoBundle 'vim-scripts/buftabs'
 let g:buftabs_only_basename = 1
 let g:buftabs_in_statusline = 1
 let g:buftabs_active_highlight_group="Visual"
 "}}}
 
 " static analyzer
-NeoBundle 'https://github.com/scrooloose/syntastic.git'
+NeoBundle 'scrooloose/syntastic'
 
 NeoBundle 'tpope/vim-surround'
 
@@ -146,26 +174,26 @@ NeoBundle 'tpope/vim-surround'
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Git {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" Support git commit
-NeoBundle 'https://github.com/tpope/vim-fugitive.git'
-" Show git log graph
-NeoBundle 'https://github.com/cohama/agit.vim.git'
-" Management branch
+" Support commit; :Gstatus, :Gdiff, :Gblame
+NeoBundle 'tpope/vim-fugitive'
+" Show log graph; :Agit
+NeoBundle 'cohama/.vim'
+" Management branch; :Merginal
 NeoBundle 'idanarye/vim-merginal'
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Ruby & Rails {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundle 'https://github.com/tpope/vim-endwise'
-NeoBundle 'https://github.com/tpope/vim-rails'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-rails'
 
-NeoBundleLazy 'https://github.com/marcus/rsense', {
+NeoBundleLazy 'marcus/rsense', {
             \ 'autoload': {
             \   'filetypes': 'ruby',
             \ },
             \ }
-NeoBundle 'https://github.com/supermomonga/neocomplete-rsense.vim', {
+NeoBundle 'supermomonga/neocomplete-rsense.vim', {
             \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
             \ }
 let g:rsenseUseOmniFunc = 1
@@ -180,16 +208,19 @@ let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 
 "}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Ruby & Rails {{{3
+" ### JavaScript & Node.js {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
+            \    "autoload" : {"filetypes" : ["javascript"]}
+            \}
 "3}}}
 "2}}}
 "------------------------------------------------------------------------------
 " ## Appearance {{{2
 "------------------------------------------------------------------------------
-NeoBundle 'https://github.com/altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'justinmk/vim-dirvish'
 "let g:dirvish_hijack_netrw = 1
 
@@ -212,7 +243,7 @@ if neobundle#is_installed('ctrlp.vim')
     set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
     let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'dir':  '\v[\/]\.|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll)$',
       \ }
 endif
@@ -223,7 +254,7 @@ endif
 " ## Nobel {{{2
 "------------------------------------------------------------------------------
 " Genko pages counter
-NeoBundle 'https://github.com/fuenor/JpFormat.vim.git'
+NeoBundle 'fuenor/JpFormat.vim'
 noremap <Leader>g :JpCountPages 20 20 <Return>
 
 call neobundle#end()
@@ -341,7 +372,7 @@ function! DisplayCreator(mode) "{{{1
     elseif a:mode == "programming"
         :only
         :NERDTree
-        :Agit
+        :
     endif
 
 endfunction
