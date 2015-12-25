@@ -34,10 +34,6 @@ call neobundle#end()
 " Required:
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
 " }}}
 "==============================================================================
 " # Plugins {{{1
@@ -70,7 +66,7 @@ NeoBundle "Shougo/vimproc.vim", {
             \ }
 
 "4}}}
-" #### Shougo/neoXXX {{{4
+" #### Shougoware {{{4
 " Mac OS X setting
 if has("mac")
   " lua is installed by homebrew
@@ -131,7 +127,6 @@ endif
 
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'honza/vim-snippets'
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -144,18 +139,43 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+NeoBundle 'honza/vim-snippets'
+let g:snips_author = "yasuhiroki"
+let g:snips_email = "yasuhiroki.duck@gmail.com"
+let g:snips_github = "https://github.com/yasuhiroki"
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+" ##### Unite {{{5
+NeoBundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+nnoremap [unite]    <Nop>
+nmap     <Space><Space> [unite]
+nnoremap [unite]u   :<C-u>Unite<Space>
+nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
+nnoremap <silent> [unite]g   :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+" Refferenced: http://blog.monochromegane.com/blog/2013/09/18/ag-and-unite/
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+"5}}}
 
 "4}}}
 " #### Buffer {{{4
@@ -169,6 +189,24 @@ let g:buftabs_active_highlight_group="Visual"
 NeoBundle 'scrooloose/syntastic'
 
 NeoBundle 'tpope/vim-surround'
+
+"3}}}
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" ###  {{{3
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+"3}}}
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" ### Format {{{3
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NeoBundle 'junegunn/vim-easy-align.git'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+NeoBundle 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup=1
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -213,6 +251,35 @@ let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
             \    "autoload" : {"filetypes" : ["javascript"]}
             \}
+
+NeoBundle "kchmck/vim-coffee-script"
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+" インデント設定
+autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
+" オートコンパイル
+  "保存と同時にコンパイルする
+"autocmd BufWritePost *.coffee silent make!
+  "エラーがあったら別ウィンドウで表示
+autocmd QuickFixCmdPost * nested cwindow | redraw!
+" Ctrl-cで右ウィンドウにコンパイル結果を一時表示する
+nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
+
+"3}}}
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" ### HTML {{{3
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NeoBundle 'mattn/emmet-vim/'
+NeoBundle "hail2u/vim-css3-syntax"
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "othree/html5.vim"
+
+
+"3}}}
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" ### Go {{{3
+"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NeoBundle 'vim-jp/vim-go-extra'
+
 "3}}}
 "2}}}
 "------------------------------------------------------------------------------
@@ -223,6 +290,15 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'justinmk/vim-dirvish'
 "let g:dirvish_hijack_netrw = 1
+
+" Remove tail whitespace
+NeoBundle 'bronson/vim-trailing-whitespace'
+
+" 80 column color
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
+endif
 
 " ### CTRL-P {{{3
 NeoBundle 'nixprime/cpsm', {
@@ -261,6 +337,11 @@ call neobundle#end()
 
 "2}}}
 "1}}}
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
 "==============================================================================
 " # Color {{{1
 "------------------------------------------------------------------------------
@@ -354,6 +435,22 @@ cnoremap <C-a> <C-b>
 cnoremap <C-e> <C-e>
 cnoremap <C-u> <C-e><C-u>
 cnoremap <C-v> <C-f>a
+
+"------------------------------------------------------------------------------
+" Window size change shortcut
+"   > http://lambdalisue.hatenablog.com/entry/2015/12/25/000046
+"------------------------------------------------------------------------------
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
+
+"------------------------------------------------------------------------------
+" Save with sudo by :w!!
+"   > http://lambdalisue.hatenablog.com/entry/2015/12/25/000046
+"------------------------------------------------------------------------------
+cabbr w!! w !sudo tee > /dev/null %
+
 
 " }}}
 "==============================================================================
