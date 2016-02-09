@@ -237,7 +237,7 @@ NeoBundle 'supermomonga/neocomplete-rsense.vim', {
 let g:rsenseUseOmniFunc = 1
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'javascript'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 NeoBundle 'thinca/vim-ref'
