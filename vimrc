@@ -215,7 +215,7 @@ let g:indent_guides_enable_on_vim_startup=1
 " Support commit; :Gstatus, :Gdiff, :Gblame
 NeoBundle 'tpope/vim-fugitive'
 " Show log graph; :Agit
-NeoBundle 'cohama/.vim'
+NeoBundle 'cohama/agit.vim'
 " Management branch; :Merginal
 NeoBundle 'idanarye/vim-merginal'
 
