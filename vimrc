@@ -188,12 +188,16 @@ let g:buftabs_active_highlight_group="Visual"
 " static analyzer
 NeoBundle 'scrooloose/syntastic'
 
+" additional movement
 NeoBundle 'tpope/vim-surround'
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ###  {{{3
+" ### {{{3 UML Tool
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+NeoBundle "aklt/plantuml-syntax"
+
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
