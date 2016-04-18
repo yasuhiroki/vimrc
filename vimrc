@@ -184,6 +184,13 @@ let g:buftabs_in_statusline = 1
 let g:buftabs_active_highlight_group="Visual"
 "}}}
 
+" Fast grep
+NeoBundle 'rking/ag.vim'
+if executable('ag')
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
+endif
+
 " static analyzer
 NeoBundle 'scrooloose/syntastic'
 
@@ -254,18 +261,6 @@ let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
             \    "autoload" : {"filetypes" : ["javascript"]}
             \}
-
-NeoBundle "kchmck/vim-coffee-script"
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
-" インデント設定
-autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
-" オートコンパイル
-  "保存と同時にコンパイルする
-"autocmd BufWritePost *.coffee silent make!
-  "エラーがあったら別ウィンドウで表示
-autocmd QuickFixCmdPost * nested cwindow | redraw!
-" Ctrl-cで右ウィンドウにコンパイル結果を一時表示する
-nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
