@@ -40,9 +40,6 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 call neobundle#begin()
 
-" Read some my conf
-runtime! my_conf/*.vim
-
 "------------------------------------------------------------------------------
 " ## Happy Programming {{{2
 "------------------------------------------------------------------------------
@@ -261,6 +258,7 @@ let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
             \    "autoload" : {"filetypes" : ["javascript"]}
             \}
+NeoBundle "pangloss/vim-javascript"
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -268,7 +266,6 @@ NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 NeoBundle 'mattn/emmet-vim/'
 NeoBundle "hail2u/vim-css3-syntax"
-NeoBundle "pangloss/vim-javascript"
 NeoBundle "othree/html5.vim"
 
 
