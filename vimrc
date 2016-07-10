@@ -455,33 +455,3 @@ autocmd FileType man setlocal nospell ts=8 nolist ro nomod noma
 
 
 " }}}
-"==============================================================================
-function! DisplayCreator(mode) "{{{1
-    "------------------------------------------------------------------------------
-    if a:mode == "novel"
-        :only
-
-        let l:file_name = expand("%:r")
-        let l:memo_file = file_name . "_memo.txt"
-        let l:abstract_file = file_name . "_abstract.txt"
-        execute "40vnew ".memo_file
-        execute "15new ".abstract_file
-
-        call feedkeys("\<C-w>\<C-l>")
-    elseif a:mode == "programming"
-        :only
-        :NERDTree
-        :
-    endif
-
-endfunction
-
-function! ListDisplayCreator(argv, cmd, cur)
-    return "
-                \novel\n
-                \programming\n
-                \"
-endfunction
-
-command! -nargs=1 -complete=custom,ListDisplayCreator -bar DisplayPrepare :call DisplayCreator(<q-args>)
-" }}}
