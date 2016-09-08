@@ -1,44 +1,43 @@
 "==============================================================================
 " FILE: vimrc
 "==============================================================================
-" Plugin Management
-"  Using NeoBundle to magnage plugins.
-"------------------------------------------------------------------------------
-" # NeoBundle {{{1
-filetype off
-set nocompatible               " Be proved
-if !1 | finish | endif
+" Plugin Management {{{1
+"  Using dein to magnage plugins.
+"
+let s:dein_dir = expand('~/.vim/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-if has('vim_starting')
-    if &compatible
-        set nocompatible               " Be iMproved
-    endif
-
-    " Required:
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+" Install dein
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  " Add dein.vim to head of runtimepath
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+if &compatible
+  set nocompatible
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+  let s:toml      = s:dein_dir . '/dein.toml'
+  let s:lazy_toml = s:dein_dir . '/dein_lazy.toml'
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-call neobundle#end()
+  call dein#end()
+  call dein#save_state()
+endif
 
-" Required:
-filetype plugin indent on
+call dein#begin(s:dein_dir)
 
-" }}}
-"==============================================================================
-" # Plugins {{{1
-"------------------------------------------------------------------------------
-call neobundle#begin()
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
 "------------------------------------------------------------------------------
 " ## Happy Programming {{{2
@@ -46,30 +45,15 @@ call neobundle#begin()
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Common {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" #### vim-quickrun {{{4
-NeoBundle 'thinca/vim-quickrun'
-let g:quickrun_config = {
-            \ "_": {"runner": "vimproc"},
-            \ }
-" Stop quickrun by <C-c>
-nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
-NeoBundle "Shougo/vimproc.vim", {
-            \ 'build' : {
-            \     'windows' : 'make -f make_mingw32.mak',
-            \     'mac' : 'make -f make_mac.mak',
-            \     'unix' : 'make -f make_unix.mak',
-            \    },
-            \ }
-
-"4}}}
 " #### Shougoware {{{4
 " Mac OS X setting
 if has("mac")
   " lua is installed by homebrew
   set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
 end
-NeoBundle "Shougo/neocomplete.vim"
+
+call dein#add("Shougo/neocomplete.vim")
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -123,171 +107,109 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 
 " ##### snippets {{{5
-
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-
-NeoBundle 'honza/vim-snippets'
-let g:snips_author = "yasuhiroki"
-let g:snips_email = "yasuhiroki.duck@gmail.com"
-let g:snips_github = "https://github.com/yasuhiroki"
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
 let g:neosnippet#snippets_directory = []
 let g:neosnippet#snippets_directory += ['~/.vim/bundle/vim-plantuml-snippets/snippets']
 let g:neosnippet#snippets_directory += ['~/.vim/bundle/neosnippet-snippets/neosnippets']
 
-if ! empty(neobundle#get("vim-snippets"))
-    let g:neosnippet#snippets_directory += ['~/.vim/bundle/vim-snippets/snippets']
-endif
-
-" ##### Unite {{{5
-NeoBundle 'Shougo/unite.vim'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-
-nnoremap [unite]    <Nop>
-nmap     <Space><Space> [unite]
-nnoremap [unite]u   :<C-u>Unite<Space>
-nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
-nnoremap <silent> [unite]g   :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-
-" Refferenced: http://blog.monochromegane.com/blog/2013/09/18/ag-and-unite/
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-"5}}}
 
 "4}}}
 " #### Buffer {{{4
-NeoBundle 'vim-scripts/buftabs'
+call dein#add('vim-scripts/buftabs')
 let g:buftabs_only_basename = 1
 let g:buftabs_in_statusline = 1
 let g:buftabs_active_highlight_group="Visual"
 "}}}
 
 " Fast grep
-NeoBundle 'rking/ag.vim'
+call dein#add('rking/ag.vim')
 if executable('ag')
     let g:ctrlp_use_caching = 0
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
 
 " static analyzer
-NeoBundle 'scrooloose/syntastic'
+call dein#add('scrooloose/syntastic')
 
 " additional movement
-NeoBundle 'tpope/vim-surround'
+call dein#add('tpope/vim-surround')
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### {{{3 UML Tool
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-NeoBundle "aklt/plantuml-syntax"
+call dein#add( "aklt/plantuml-syntax")
 
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Format {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundle 'junegunn/vim-easy-align.git'
+call dein#add('junegunn/vim-easy-align.git')
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-NeoBundle 'nathanaelkane/vim-indent-guides'
+call dein#add('nathanaelkane/vim-indent-guides')
 let g:indent_guides_enable_on_vim_startup=1
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Git {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" Support commit; :Gstatus, :Gdiff, :Gblame
-NeoBundle 'tpope/vim-fugitive'
-" Show log graph; :Agit
-NeoBundle 'cohama/agit.vim'
-" Management branch; :Merginal
-NeoBundle 'idanarye/vim-merginal'
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Ruby & Rails {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-rails'
+call dein#add('tpope/vim-endwise')
+call dein#add('tpope/vim-rails')
 
-NeoBundleLazy 'marcus/rsense', {
-            \ 'autoload': {
-            \   'filetypes': 'ruby',
-            \ },
-            \ }
-NeoBundle 'supermomonga/neocomplete-rsense.vim', {
-            \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
-            \ }
+call dein#add('marcus/rsense', { 'lazy': 1, 'on_ft': ['ruby'] })
+call dein#add('supermomonga/neocomplete-rsense.vim')
 let g:rsenseUseOmniFunc = 1
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'javascript'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'yuku-t/vim-ref-ri'
+call dein#add('thinca/vim-ref')
+call dein#add('yuku-t/vim-ref-ri')
 let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 
 "}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### JavaScript & Node.js {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundleLazy 'heavenshell/vim-jsdoc' ,{
-            \    "autoload" : {"filetypes" : ["javascript"]}
-            \}
-NeoBundle "pangloss/vim-javascript"
+call dein#add('heavenshell/vim-jsdoc' ,{ 'lazy': 1, 'on_ft': ['javascript'] })
+call dein#add('pangloss/vim-javascript')
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### HTML {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundle 'mattn/emmet-vim/'
-NeoBundle "hail2u/vim-css3-syntax"
-NeoBundle "othree/html5.vim"
 
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Go {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-NeoBundle 'vim-jp/vim-go-extra'
+call dein#add('vim-jp/vim-go-extra')
 
 "3}}}
 "2}}}
 "------------------------------------------------------------------------------
 " ## Appearance {{{2
 "------------------------------------------------------------------------------
-NeoBundle 'altercation/vim-colors-solarized'
+call dein#add('altercation/vim-colors-solarized', {'merged': 0})
 
-NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'justinmk/vim-dirvish'
+call dein#add('scrooloose/nerdtree')
+"call dein#add('justinmk/vim-dirvish')
 "let g:dirvish_hijack_netrw = 1
 
 " Remove tail whitespace
-NeoBundle 'bronson/vim-trailing-whitespace'
+call dein#add('bronson/vim-trailing-whitespace')
 
 " 80 column color
 if (exists('+colorcolumn'))
@@ -296,28 +218,21 @@ if (exists('+colorcolumn'))
 endif
 
 " ### CTRL-P {{{3
-NeoBundle 'nixprime/cpsm', {
-            \ 'build' : {
-            \   'others': 'sh install.sh',
-            \ },
-            \ }
+call dein#add('nixprime/cpsm' )
+call dein#add('ctrlpvim/ctrlp.vim' )
+let g:ctrlp_use_migemo = 1 " Don't install migemo yet
+let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
+let g:ctrlp_mruf_max            = 500 " Max memorable mru
+let g:ctrlp_open_new_file       = 1   " Open new file as tab
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 
-NeoBundle 'ctrlpvim/ctrlp.vim'
-if neobundle#is_installed('ctrlp.vim')
-    "let g:ctrlp_use_migemo = 1 Don't install migemo yet
-    let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
-    let g:ctrlp_mruf_max            = 500 " Max memorable mru
-    let g:ctrlp_open_new_file       = 1   " Open new file as tab
-    let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-    let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ }
-endif
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 " 3}}}
 
 "2}}}
@@ -325,17 +240,15 @@ endif
 " ## Nobel {{{2
 "------------------------------------------------------------------------------
 " Genko pages counter
-NeoBundle 'fuenor/JpFormat.vim'
+call dein#add('fuenor/JpFormat.vim' )
 noremap <Leader>g :JpCountPages 20 20 <Return>
 
-call neobundle#end()
+call dein#end()
+
+filetype plugin indent on
 
 "2}}}
 "1}}}
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 "==============================================================================
 " # Color {{{1
@@ -382,7 +295,6 @@ set showcmd
 "------------------------------------------------------------------------------
 " status line settings
 "------------------------------------------------------------------------------
-set statusline=%=\ %{fugitive#statusline()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 set laststatus=2
 
 "------------------------------------------------------------------------------
@@ -452,6 +364,5 @@ cabbr w!! w !sudo tee > /dev/null %
 "------------------------------------------------------------------------------
 runtime ftplugin/man.vim
 autocmd FileType man setlocal nospell ts=8 nolist ro nomod noma
-
 
 " }}}
