@@ -1,3 +1,4 @@
+" http://komachi.yomiuri.co.jp/t/2013/0911/617138.htm
 let s:save_cpo = &cpo
 set cpo&vim
 
