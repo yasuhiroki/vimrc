@@ -93,6 +93,8 @@ Echo "Update .vimrc file."
 cp -f vimrc $HOME/.vimrc
 Echo "Update dein toml"
 cp -f dein/*.toml $HOME/.vim/dein/
+[ -f $HOME/.vim/dein/local_dein.toml ] || touch $HOME/.vim/dein/local_dein.toml
+[ -f $HOME/.vim/dein/local_dein_lazy.toml ] || touch $HOME/.vim/dein/local_dein_lazy.toml
 echo ""
 
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
