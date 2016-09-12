@@ -222,8 +222,8 @@ if (exists('+colorcolumn'))
 endif
 
 " ### CTRL-P {{{3
-call dein#add('nixprime/cpsm' )
 call dein#add('ctrlpvim/ctrlp.vim' )
+call dein#add('nixprime/cpsm' )
 let g:ctrlp_use_migemo = 1 " Don't install migemo yet
 let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
 let g:ctrlp_mruf_max            = 500 " Max memorable mru
