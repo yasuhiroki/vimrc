@@ -89,3 +89,5 @@ repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 
+[[plugins]]
+repo = 'cohama/lexima.vim'

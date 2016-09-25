@@ -56,17 +56,6 @@ call tern#Enable()
 '''
 
 [[plugins]]
-repo = 'kana/vim-smartinput'
-on_i = 1
-
-[[plugins]]
-repo = 'cohama/vim-smartinput-endwise'
-on_ft = ['ruby']
-hook_source = '''
-call smartinput_endwise#define_default_rules()
-'''
-
-[[plugins]]
 repo = 'Quramy/tsuquyomi'
 on_ft = ['typescript']
 hook_source = '''

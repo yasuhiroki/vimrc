@@ -21,7 +21,7 @@ let g:neocomplete#manual_completion_start_length = 0
 " Set minimum keyword length.
 let g:neocomplete#min_keyword_length = 3
 
-let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#enable_auto_select = 1
 
 let g:neocomplete#sources#dictionary#dictionaries = {
       \ 'default' : '',
@@ -82,17 +82,7 @@ let g:neocomplete#keyword_patterns.rst =
 let g:neocomplete#ignore_source_files = []
 
 let g:neocomplete#sources#vim#complete_functions = {
-      \ 'Ref' : 'ref#complete',
-      \ 'Unite' : 'unite#complete_source',
-      \ 'VimShellExecute' :
-      \      'vimshell#vimshell_execute_complete',
-      \ 'VimShellInteractive' :
-      \      'vimshell#vimshell_execute_complete',
-      \ 'VimShellTerminal' :
-      \      'vimshell#vimshell_execute_complete',
-      \ 'VimShell' : 'vimshell#complete',
-      \ 'VimFiler' : 'vimfiler#complete',
-      \ 'Vinarise' : 'vinarise#complete',
+      \ 'Ref' : 'ref#complete'
       \}
 call neocomplete#custom#source('look', 'min_pattern_length', 4)
 " call neocomplete#custom#source('_', 'sorters', [])
@@ -125,7 +115,7 @@ inoremap <expr> <C-l>     neocomplete#mappings#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
-  return neocomplete#smart_close_popup() . "\<CR>"
+ return neocomplete#smart_close_popup() . "\<CR>"
 endfunction
 
 " <TAB>: completion.
