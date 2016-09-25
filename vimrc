@@ -33,7 +33,7 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:_lazy_toml, {'lazy': 1})
 
   call dein#end()
-  call dein#save_state()
+  "call dein#save_state()
 endif
 
 call dein#begin(s:dein_dir)
@@ -57,63 +57,7 @@ if has("mac")
   set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
 end
 
-call dein#add("Shougo/neocomplete.vim")
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-
-" Define dictionary.
-let g:neocomplete_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete_keyword_patterns')
-    let g:neocomplete_keyword_patterns = {}
-endif
-let g:neocomplete_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  "return neocomplete#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
 " ##### snippets {{{5
-let g:neosnippet#snippets_directory = []
-let g:neosnippet#snippets_directory += ['~/.vim/bundle/vim-plantuml-snippets/snippets']
-let g:neosnippet#snippets_directory += ['~/.vim/bundle/neosnippet-snippets/neosnippets']
 
 
 "4}}}
@@ -131,11 +75,6 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
 
-" static analyzer
-call dein#add('scrooloose/syntastic')
-
-" additional movement
-call dein#add('tpope/vim-surround')
 
 "3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -167,29 +106,9 @@ let g:indent_guides_enable_on_vim_startup=1
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### Ruby & Rails {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-call dein#add('tpope/vim-endwise')
-call dein#add('tpope/vim-rails')
-
-call dein#add('marcus/rsense', { 'lazy': 1, 'on_ft': ['ruby'] })
-call dein#add('supermomonga/neocomplete-rsense.vim')
-let g:rsenseUseOmniFunc = 1
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
-
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'javascript'] }
-let g:syntastic_ruby_checkers = ['rubocop']
-
-call dein#add('thinca/vim-ref')
-call dein#add('yuku-t/vim-ref-ri')
-let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe'
 
 "}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### JavaScript & Node.js {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-call dein#add('heavenshell/vim-jsdoc' ,{ 'lazy': 1, 'on_ft': ['javascript'] })
-call dein#add('pangloss/vim-javascript')
 
-"3}}}
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " ### HTML {{{3
 "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -209,8 +128,6 @@ call dein#add('vim-jp/vim-go-extra')
 call dein#add('altercation/vim-colors-solarized', {'merged': 0})
 
 call dein#add('scrooloose/nerdtree')
-"call dein#add('justinmk/vim-dirvish')
-"let g:dirvish_hijack_netrw = 1
 
 " Remove tail whitespace
 call dein#add('bronson/vim-trailing-whitespace')
@@ -221,23 +138,6 @@ if (exists('+colorcolumn'))
     highlight ColorColumn ctermbg=9
 endif
 
-" ### CTRL-P {{{3
-call dein#add('ctrlpvim/ctrlp.vim' )
-call dein#add('nixprime/cpsm' )
-let g:ctrlp_use_migemo = 1 " Don't install migemo yet
-let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
-let g:ctrlp_mruf_max            = 500 " Max memorable mru
-let g:ctrlp_open_new_file       = 1   " Open new file as tab
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-" 3}}}
 
 "2}}}
 "------------------------------------------------------------------------------
@@ -278,6 +178,7 @@ set backup
 set swapfile
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
+
 
 set shiftwidth=4
 set tabstop=4
