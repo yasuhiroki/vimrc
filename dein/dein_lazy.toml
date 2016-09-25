@@ -63,3 +63,8 @@ augroup typescript_key_mapping
   autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
 augroup END
 '''
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+on_ft = ['go']
+

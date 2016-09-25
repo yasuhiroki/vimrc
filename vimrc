@@ -43,109 +43,19 @@ if dein#check_install()
   call dein#install()
 endif
 
-"------------------------------------------------------------------------------
-" ## Happy Programming {{{2
-"------------------------------------------------------------------------------
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Common {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" #### Shougoware {{{4
-" Mac OS X setting
 if has("mac")
   " lua is installed by homebrew
   set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
 end
 
-" ##### snippets {{{5
-
-
-"4}}}
-" #### Buffer {{{4
-call dein#add('vim-scripts/buftabs')
-let g:buftabs_only_basename = 1
-let g:buftabs_in_statusline = 1
-let g:buftabs_active_highlight_group="Visual"
-"}}}
-
-" Fast grep
-call dein#add('rking/ag.vim')
-if executable('ag')
-    let g:ctrlp_use_caching = 0
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
-endif
-
-
-"3}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### {{{3 UML Tool
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-call dein#add( "aklt/plantuml-syntax")
-
-
-"3}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Format {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-call dein#add('junegunn/vim-easy-align.git')
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-call dein#add('nathanaelkane/vim-indent-guides')
-let g:indent_guides_enable_on_vim_startup=1
-
-"3}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Git {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-"3}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Ruby & Rails {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-"}}}
-
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### HTML {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-"3}}}
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" ### Go {{{3
-"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-call dein#add('vim-jp/vim-go-extra')
-
-"3}}}
 "2}}}
 "------------------------------------------------------------------------------
 " ## Appearance {{{2
 "------------------------------------------------------------------------------
 call dein#add('altercation/vim-colors-solarized', {'merged': 0})
 
-call dein#add('scrooloose/nerdtree')
-
-" Remove tail whitespace
-call dein#add('bronson/vim-trailing-whitespace')
 
 " 80 column color
-if (exists('+colorcolumn'))
-    set colorcolumn=80
-    highlight ColorColumn ctermbg=9
-endif
-
-
-"2}}}
-"------------------------------------------------------------------------------
-" ## Nobel {{{2
-"------------------------------------------------------------------------------
-" Genko pages counter
-call dein#add('fuenor/JpFormat.vim' )
-noremap <Leader>g :JpCountPages 20 20 <Return>
 
 call dein#end()
 
@@ -153,7 +63,7 @@ filetype plugin indent on
 
 "2}}}
 "1}}}
-
+"
 "==============================================================================
 " # Color {{{1
 "------------------------------------------------------------------------------
@@ -167,6 +77,12 @@ endif
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
+
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
+endif
+
 
 "}}}
 "==============================================================================

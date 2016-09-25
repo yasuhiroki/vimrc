@@ -91,3 +91,42 @@ repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'vim-scripts/buftabs'
+hook_add = '''
+let g:buftabs_only_basename = 1
+let g:buftabs_in_statusline = 1
+let g:buftabs_active_highlight_group="Visual"
+'''
+
+[[plugins]]
+repo = 'rking/ag.vim'
+hook_add = '''
+if executable('ag')
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
+endif
+'''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align.git'
+hook_add = '''
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+repo = "aklt/plantuml-syntax"
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup=1
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
