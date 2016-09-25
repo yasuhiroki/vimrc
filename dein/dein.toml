@@ -88,7 +88,4 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-hook_add = '''
-autocmd BufRead,BufNewFile *.ts set filetype=typescript
-'''
 
