@@ -65,3 +65,12 @@ on_ft = ['ruby']
 hook_source = '''
 call smartinput_endwise#define_default_rules()
 '''
+
+[[plugins]]
+repo = 'Quramy/tsuquyomi'
+on_ft = ['typescript']
+hook_source = '''
+augroup typescript_key_mapping
+  autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
+augroup END
+'''
