@@ -130,3 +130,7 @@ repo = 'scrooloose/nerdtree'
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+merged = 0

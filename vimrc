@@ -32,38 +32,24 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:_toml,      {'lazy': 0})
   call dein#load_toml(s:_lazy_toml, {'lazy': 1})
 
+  if dein#check_install()
+    call dein#install()
+  endif
+
   call dein#end()
   "call dein#save_state()
 endif
 
-call dein#begin(s:dein_dir)
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
+"2}}}
+"1}}}
 
 if has("mac")
   " lua is installed by homebrew
   set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
 end
 
-"2}}}
-"------------------------------------------------------------------------------
-" ## Appearance {{{2
-"------------------------------------------------------------------------------
-call dein#add('altercation/vim-colors-solarized', {'merged': 0})
-
-
-" 80 column color
-
-call dein#end()
-
 filetype plugin indent on
 
-"2}}}
-"1}}}
-"
 "==============================================================================
 " # Color {{{1
 "------------------------------------------------------------------------------
