@@ -29,6 +29,7 @@ hook_post_source = '''
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
+on_ft = ['html', 'xml']
 
 [[plugins]]
 repo = 'hail2u/vim-css3-syntax'
