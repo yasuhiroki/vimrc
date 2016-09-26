@@ -46,21 +46,6 @@ CreateDir(){
     fi
 }
 
-NeoBundle(){
-    Echo_Line 2
-    Echo "neobundle.vim."
-    if [ ! -d "$HOME/$bundle_dir/neobundle.vim" ]; then
-        cd $HOME/$bundle_dir
-        git clone https://github.com/Shougo/neobundle.vim.git
-        cd -
-    else
-        cd $HOME/$bundle_dir/neobundle.vim
-        git pull https://github.com/Shougo/neobundle.vim.git
-        cd -
-    fi
-    echo ""
-}
-
 UpdateDir(){
     src=$1
     dist=$2
@@ -84,7 +69,6 @@ else
     script_dir=$(readlink -f $(dirname $0))
 fi
 line_cnt=100
-bundle_dir=".vim/bundle"
 ftplugin_dir=".vim/ftplugin"
 template_dir=".vim/template"
 ftdetect_dir=".vim/ftdetect"
@@ -98,16 +82,19 @@ Echo_Line 1
 
 cd $script_dir
 
-CreateDir "$HOME/$bundle_dir"
+CreateDir "$HOME/.vim/dein"
 CreateDir "$HOME/.vim/swap"
 CreateDir "$HOME/.vim/backup"
 
-NeoBundle
 
 # setup .vimrc file
 Echo_Line 2
 Echo "Update .vimrc file."
 cp -f vimrc $HOME/.vimrc
+Echo "Update dein toml"
+cp -f dein/* $HOME/.vim/dein/
+[ -f $HOME/.vim/dein/local_dein.toml ] || touch $HOME/.vim/dein/local_dein.toml
+[ -f $HOME/.vim/dein/local_dein_lazy.toml ] || touch $HOME/.vim/dein/local_dein_lazy.toml
 echo ""
 
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
