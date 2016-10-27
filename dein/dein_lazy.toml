@@ -35,6 +35,9 @@ on_ft = ['html', 'xml']
 repo = 'hail2u/vim-css3-syntax'
 on_ft = ['css', 'scss', 'sass']
 
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascrpt', 'typescript']
 
 [[plugins]]
 #repo = 'jason0x43/vim-js-indent'
