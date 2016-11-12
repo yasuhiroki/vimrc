@@ -85,7 +85,6 @@ cd $script_dir
 CreateDir "$HOME/.vim/dein"
 CreateDir "$HOME/.vim/swap"
 CreateDir "$HOME/.vim/backup"
-CreateDir "$HOME/.vim/snippets"
 
 
 # setup .vimrc file
@@ -101,7 +100,6 @@ echo ""
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
 UpdateDir "vim/ftdetect" "$HOME/$ftdetect_dir"
-find . -name "*.snippets" -exec cp {} ~/.vim/snippets/ \;
 
 cd -
 

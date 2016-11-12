@@ -85,6 +85,9 @@ repo = 'Shougo/context_filetype.vim'
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
+repo = 'yasuhiroki/vim-plantuml-snippets'
+
+[[plugins]]
 repo = 'tpope/vim-surround'
 
 [[plugins]]
