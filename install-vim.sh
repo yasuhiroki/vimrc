@@ -1,7 +1,11 @@
 #!/bin/bash -e
 function is_osx() {
-  [[ $(uname) =~ "Darwin" ]] && echo "MacOSX should be install MacVim" && exit 1
+  [[ $(uname) =~ "Darwin" ]]
 }
+
+if is_osx; then
+  echo "MacOSX should be install MacVim" && exit 1
+fi
 
 apt-get build-dep vim
 apt install gettext libncurses5-dev libacl1-dev libgpm-dev lua5.2 liblua5.2-dev luajit libluajit-5.1 libperl-dev python-dev python3-dev ruby-dev
