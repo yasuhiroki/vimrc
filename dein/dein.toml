@@ -39,10 +39,6 @@ repo = 'cohama/agit.vim'
 repo = 'idanarye/vim-merginal'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
 let g:ctrlp_use_migemo = 1 " Don't install migemo yet
