@@ -138,3 +138,10 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
 merged = 0
+
+[[plugins]]
+repo = 'LucHermitte/lh-vim-lib'
+
+[[plugins]]
+repo = 'LucHermitte/local_vimrc'
+depends = ['LucHermitte/lh-vim-lib']
