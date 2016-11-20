@@ -78,9 +78,6 @@ let g:syntastic_javascript_checkers=['eslint']
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
 repo = 'yasuhiroki/vim-plantuml-snippets'
 
 [[plugins]]
