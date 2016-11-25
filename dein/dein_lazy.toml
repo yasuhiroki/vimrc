@@ -44,9 +44,7 @@ repo = 'heavenshell/vim-jsdoc'
 on_ft = ['javascrpt', 'typescript']
 
 [[plugins]]
-#repo = 'jason0x43/vim-js-indent'
-repo = 'ichizok/vim-js-indent.git'
-rev  = 'fix-errors'
+repo = 'jason0x43/vim-js-indent'
 on_ft = ['javascrpt', 'typescript', 'html']
 hook_source = '''
 let g:js_indent_typescript = 1
