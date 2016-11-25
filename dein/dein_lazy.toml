@@ -40,6 +40,10 @@ repo = 'othree/yajs.vim'
 on_ft = ['javascrpt', 'typescript']
 
 [[plugins]]
+repo = 'heavenshell/vim-jsdoc'
+on_ft = ['javascrpt', 'typescript']
+
+[[plugins]]
 #repo = 'jason0x43/vim-js-indent'
 repo = 'ichizok/vim-js-indent.git'
 rev  = 'fix-errors'
