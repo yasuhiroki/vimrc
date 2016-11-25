@@ -51,6 +51,7 @@ UpdateDir(){
     dist=$2
 
     Echo_Line 2
+    [ ! -d $src ] && Echo "Not found $src, skip" && return 0
     Echo "Update $dist"
     if [ ! -d $dist ]; then
         mkdir -p $dist
