@@ -148,3 +148,9 @@ let g:auto_ctags_directory_list = ['.git', '.svn']
 
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'
+
+[[plugins]]
+repo = 'rhysd/vim-gfm-syntax'
+hook_add = '''
+let g:gfm_syntax_emoji_conceal = 1
+'''

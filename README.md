@@ -56,6 +56,8 @@ Plugins are managed by [dein.vim](https://github.com/Shougo/dein.vim).
 
 ### [html5.vim](https://github.com/othree/html5.vim)
 
+### [vim-gfm-syntax](https://github.com/rhysd/vim-gfm-syntax)
+
 ## Coding Support
 
 ### [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
