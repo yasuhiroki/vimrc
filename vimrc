@@ -55,11 +55,7 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 syntax enable
 set t_Co=256
-if has('mac')
-    set background=light
-else
-    set background=dark
-endif
+set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
