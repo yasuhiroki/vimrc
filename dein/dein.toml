@@ -57,7 +57,7 @@ let g:ctrlp_custom_ignore = {
 
 [[plugins]]
 repo = 'nixprime/cpsm'
-build = 'bash install.sh'
+build = 'PY3=ON bash install.sh'
 depends = ['ctrlp.vim']
 hook_add = '''
 if dein#util#_is_mac()
