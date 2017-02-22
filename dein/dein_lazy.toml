@@ -63,6 +63,8 @@ call tern#Enable()
 repo = 'Quramy/tsuquyomi'
 on_ft = ['typescript']
 hook_source = '''
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 augroup typescript_key_mapping
   autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
 augroup END
