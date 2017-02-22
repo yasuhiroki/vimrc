@@ -37,7 +37,7 @@ if dein#load_state(s:dein_dir)
   endif
 
   call dein#end()
-  "call dein#save_state()
+  call dein#save_state()
 endif
 
 "2}}}
@@ -49,11 +49,11 @@ if has("mac")
 end
 
 filetype plugin indent on
+syntax enable
 
 "==============================================================================
 " # Color {{{1
 "------------------------------------------------------------------------------
-syntax enable
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
@@ -104,8 +104,6 @@ set laststatus=2
 " Other
 "------------------------------------------------------------------------------
 set foldmethod=marker
-filetype plugin indent on
-filetype on
 
 "------------------------------------------------------------------------------
 " Only MacVim
