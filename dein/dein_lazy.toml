@@ -61,6 +61,7 @@ call tern#Enable()
 
 [[plugins]]
 repo = 'Quramy/tsuquyomi'
+depends = ['typescript-vim']
 on_ft = ['typescript']
 hook_source = '''
 let g:tsuquyomi_disable_quickfix = 1
