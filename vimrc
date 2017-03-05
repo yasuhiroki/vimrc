@@ -45,7 +45,7 @@ endif
 
 if has("mac")
   " lua is installed by homebrew
-  set luadll=/usr/local/Cellar/lua/5.2.4_1/lib/liblua.dylib
+  set luadll=/usr/local/Cellar/lua/5.2.4_4/lib/liblua.dylib
 end
 
 filetype plugin indent on
