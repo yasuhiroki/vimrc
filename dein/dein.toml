@@ -154,3 +154,20 @@ repo = 'rhysd/vim-gfm-syntax'
 hook_add = '''
 let g:gfm_syntax_emoji_conceal = 1
 '''
+
+[[plugins]]
+repo = 'liquidz/vivi.vim'
+[[plugins]]
+repo = 'elixir-lang/vim-elixir'
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+[[plugins]]
+repo = 'thinca/vim-ref'
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+[[plugins]]
+repo = 'osyo-manga/vim-watchdogs'
