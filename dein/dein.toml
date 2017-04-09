@@ -82,6 +82,7 @@ repo = 'yasuhiroki/vim-plantuml-snippets'
 
 [[plugins]]
 repo = 'yasuhiroki/vim-aws-plantuml-snippets'
+depends = ['yasuhiroki/vim-plantuml-snippets']
 
 [[plugins]]
 repo = 'tpope/vim-surround'
