@@ -103,9 +103,6 @@ repo = 'tpope/vim-surround'
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
-
-[[plugins]]
 repo = 'vim-scripts/buftabs'
 hook_add = '''
 let g:buftabs_only_basename = 1
