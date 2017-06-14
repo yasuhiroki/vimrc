@@ -14,20 +14,6 @@ on_ft = 'snippet'
 hook_source = 'source ~/.vim/dein/neosnippet.rc.vim'
 
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-depends = 'context_filetype.vim'
-if = "has('lua')"
-on_event = 'InsertEnter'
-hook_source = '''
-  let g:neocomplete#enable_at_startup = 1
-  source ~/.vim/dein/neocomplete.rc.vim
-'''
-hook_post_source = '''
-  let g:neocomplete#sources#omni#functions.typescript = 'tern#Complete'
-  let g:neocomplete#sources#omni#input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?'
-'''
-
-[[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'xml']
 
@@ -64,7 +50,6 @@ repo = 'Quramy/tsuquyomi'
 depends = ['typescript-vim']
 on_ft = ['typescript']
 hook_source = '''
-let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 augroup typescript_key_mapping
   autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)

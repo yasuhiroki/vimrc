@@ -2,6 +2,45 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = "has('lua')"
+hook_source = '''
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#disable_auto_complete = 0
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_camel_case = 1
+  let g:neocomplete#auto_complete_delay = 30
+  let g:neocomplete#enable_fuzzy_completion = 1
+  let g:neocomplete#auto_completion_start_length = 2
+  let g:neocomplete#manual_completion_start_length = 0
+  let g:neocomplete#min_keyword_length = 3
+  if !exists('g:neocomplete#sources#omni#functions')
+    let g:neocomplete#sources#omni#functions = {}
+  endif
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  if !exists('g:neocomplete#source#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#sources#omni#functions.typescript = 'tern#Complete'
+  let g:neocomplete#sources#omni#input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?'
+  let g:neocomplete#keyword_patterns._ = '\h\k*(\?'
+
+  inoremap <expr> <C-g>     neocomplete#undo_completion()
+  inoremap <expr> <C-l>     neocomplete#mappings#complete_common_string()
+
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function() abort
+   return neocomplete#smart_close_popup() . "\<CR>"
+  endfunction
+'''
+
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
