@@ -157,8 +157,9 @@ let g:gfm_syntax_emoji_conceal = 1
 '''
 
 [[plugins]]
-repo = 'liquidz/vivi.vim'
-[[plugins]]
 repo = 'elixir-lang/vim-elixir'
+[[plugins]]
+repo = 'slashmili/alchemist.vim'
+
 [[plugins]]
 repo = 'thinca/vim-ref'
