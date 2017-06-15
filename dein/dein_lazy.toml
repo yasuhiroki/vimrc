@@ -3,6 +3,10 @@ repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
 [[plugins]]
+repo = 'othree/html5.vim'
+on_ft = ['html']
+
+[[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'xml']
 
@@ -18,20 +22,16 @@ on_ft = ['javascrpt', 'typescript']
 repo = 'jason0x43/vim-js-indent'
 on_ft = ['javascrpt', 'typescript', 'html']
 hook_source = '''
-let g:js_indent_typescript = 1
+  let g:js_indent_typescript = 1
 '''
-
-[[plugins]]
-repo = 'othree/html5.vim'
-on_ft = ['html']
 
 [[plugins]]
 repo = 'marijnh/tern_for_vim'
 depends = ['typescript-vim']
 build = 'npm install'
 on_ft = ['javascript', 'typescript']
-hook_source = '''
-call tern#Enable()
+hook_post_source = '''
+  call tern#Enable()
 '''
 
 [[plugins]]
@@ -39,13 +39,35 @@ repo = 'Quramy/tsuquyomi'
 depends = ['typescript-vim']
 on_ft = ['typescript']
 hook_source = '''
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-augroup typescript_key_mapping
-  autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
-augroup END
+  let g:tsuquyomi_disable_quickfix = 1
+  let g:syntastic_typescript_checkers = ['tsuquyomi']
+  augroup typescript_key_mapping
+    autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
+  augroup END
 '''
 
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
 on_ft = ['go']
 
+[[plugins]]
+repo = 'elixir-lang/vim-elixir'
+on_ft = ['elixir']
+
+[[plugins]]
+repo = 'slashmili/alchemist.vim'
+on_ft = ['elixir']
+
+
+[[plugins]]
+repo = "aklt/plantuml-syntax"
+on_ft = ['plantuml']
+
+[[plugins]]
+repo = 'yasuhiroki/vim-plantuml-snippets'
+on_ft = ['plantuml']
+
+[[plugins]]
+repo = 'yasuhiroki/vim-aws-plantuml-snippets'
+depends = ['vim-plantuml-snippets']
+on_ft = ['plantuml']

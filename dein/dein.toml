@@ -56,7 +56,7 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-hook_source = '''
+hook_post_source = '''
     set statusline=%=\ %{fugitive#statusline()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 '''
 
@@ -88,10 +88,7 @@ repo = 'nixprime/cpsm'
 build = 'PY3=ON bash install.sh'
 depends = ['ctrlp.vim']
 hook_add = '''
-if dein#util#_is_mac()
-else
-    let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-endif
+  let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 '''
 
 [[plugins]]
@@ -116,13 +113,6 @@ repo = "aklt/plantuml-syntax"
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
-
-[[plugins]]
-repo = 'yasuhiroki/vim-plantuml-snippets'
-
-[[plugins]]
-repo = 'yasuhiroki/vim-aws-plantuml-snippets'
-depends = ['yasuhiroki/vim-plantuml-snippets']
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -183,11 +173,6 @@ repo = 'rhysd/vim-gfm-syntax'
 hook_add = '''
 let g:gfm_syntax_emoji_conceal = 1
 '''
-
-[[plugins]]
-repo = 'elixir-lang/vim-elixir'
-[[plugins]]
-repo = 'slashmili/alchemist.vim'
 
 [[plugins]]
 repo = 'thinca/vim-ref'
