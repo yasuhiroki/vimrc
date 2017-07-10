@@ -56,7 +56,7 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-hook_post_source = '''
+hook_add = '''
     set statusline=%=\ %{fugitive#statusline()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 '''
 
