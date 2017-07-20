@@ -176,3 +176,6 @@ let g:gfm_syntax_emoji_conceal = 1
 
 [[plugins]]
 repo = 'thinca/vim-ref'
+
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
