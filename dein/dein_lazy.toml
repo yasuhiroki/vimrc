@@ -27,11 +27,11 @@ on_ft = ['css', 'scss', 'sass']
 ###################
 [[plugins]]
 repo = 'othree/yajs.vim'
-on_ft = ['javascrpt', 'typescript']
+on_ft = ['javascript', 'typescript']
 
 [[plugins]]
 repo = 'jason0x43/vim-js-indent'
-on_ft = ['javascrpt', 'typescript', 'html']
+on_ft = ['javascript', 'typescript', 'html']
 hook_source = '''
   let g:js_indent_typescript = 1
 '''
