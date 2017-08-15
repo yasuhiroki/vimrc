@@ -101,11 +101,11 @@ endif
 '''
 
 [[plugins]]
-repo = 'vim-syntastic/syntastic'
+repo = 'w0rp/ale'
 hook_add = '''
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby', 'javascript', 'typescript', 'elixir'] }
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_javascript_checkers=['eslint']
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 '''
 
 [[plugins]]
