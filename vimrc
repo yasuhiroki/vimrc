@@ -148,13 +148,10 @@ cnoremap <C-u> <C-e><C-u>
 cnoremap <C-v> <C-f>a
 
 "------------------------------------------------------------------------------
-" Window size change shortcut
-"   > http://lambdalisue.hatenablog.com/entry/2015/12/25/000046
+" Key mapping in insert mode
 "------------------------------------------------------------------------------
-nnoremap <S-Left>  <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
-nnoremap <S-Up>    <C-w>-<CR>
-nnoremap <S-Down>  <C-w>+<CR>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 
 "------------------------------------------------------------------------------
 " Save with sudo by :w!!
