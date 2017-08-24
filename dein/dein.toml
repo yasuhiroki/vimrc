@@ -164,7 +164,10 @@ depends = ['LucHermitte/lh-vim-lib']
 repo = 'soramugi/auto-ctags.vim'
 hook_add = '''
 let g:auto_ctags = 1
-let g:auto_ctags_directory_list = ['.git', '.svn']
+let g:auto_ctags_directory_list = ['.git']
+" --tag-relative は universal-ctags だと使えない
+let g:auto_ctags_tags_args = '--recurse --sort=yes'
+set tags+=.git/tags
 '''
 
 [[plugins]]
