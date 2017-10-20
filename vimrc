@@ -164,4 +164,11 @@ autocmd QuickFixCmdPost *grep* cwindow
 runtime ftplugin/man.vim
 autocmd FileType man setlocal nospell ts=8 nolist ro nomod noma
 
+"------------------------------------------------------------------------------
+" Enable matchit.vim
+"------------------------------------------------------------------------------
+if !exists('loaded_matchit')
+    runtime macros/matchit.vim
+endif
+
 " }}}
