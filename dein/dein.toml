@@ -183,3 +183,7 @@ repo = 'thinca/vim-ref'
 
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
+
+[[plugins]]
+repo = 'martinda/Jenkinsfile-vim-syntax'
+
