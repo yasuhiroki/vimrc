@@ -185,5 +185,8 @@ repo = 'thinca/vim-ref'
 repo = 'ekalinin/Dockerfile.vim'
 
 [[plugins]]
+repo = 'vim-scripts/groovyindent-unix'
+
+[[plugins]]
 repo = 'martinda/Jenkinsfile-vim-syntax'
 
