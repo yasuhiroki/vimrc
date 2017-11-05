@@ -1,6 +1,13 @@
+###################
+# dein.vim
+###################
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+
+###################
+# Completion
+###################
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_source = '''
@@ -18,6 +25,10 @@ repo = 'roxma/vim-hug-neovim-rpc'
 [[plugins]]
 repo = 'fishbullet/deoplete-ruby'
 
+
+###################
+# Snippets
+###################
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
@@ -26,12 +37,10 @@ repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets', 'context_filetype.vim']
 hook_source = 'source ~/.vim/dein/neosnippet.rc.vim'
 
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-hook_add = '''
-nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
-'''
 
+###################
+# Git
+###################
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
@@ -44,6 +53,20 @@ repo = 'cohama/agit.vim'
 [[plugins]]
 repo = 'idanarye/vim-merginal'
 
+
+###################
+# Quickrun
+###################
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+'''
+
+
+###################
+# CtrlP
+###################
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
@@ -78,6 +101,10 @@ if executable('ag')
 endif
 '''
 
+
+###################
+# Lint
+###################
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
@@ -88,17 +115,35 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 '''
 
+
+###################
+# Coding support
+###################
 [[plugins]]
-repo = "aklt/plantuml-syntax"
+repo = 'junegunn/vim-easy-align.git'
+hook_add = '''
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+'''
 
 [[plugins]]
-repo = 'Shougo/context_filetype.vim'
+repo = 'bronson/vim-trailing-whitespace'
 
+[[plugins]]
+repo = 'soramugi/auto-ctags.vim'
+hook_add = '''
+let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git']
+let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
+set tags+=.git/tags
+'''
+
+
+###################
+# Extension
+###################
 [[plugins]]
 repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
 repo = 'b4b4r07/buftabs'
@@ -106,13 +151,6 @@ hook_add = '''
 let g:buftabs_only_basename = 1
 let g:buftabs_in_statusline = 1
 let g:buftabs_active_highlight_group="Visual"
-'''
-
-[[plugins]]
-repo = 'junegunn/vim-easy-align.git'
-hook_add = '''
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 '''
 
 [[plugins]]
@@ -125,32 +163,6 @@ let g:indent_guides_enable_on_vim_startup=1
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
-
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
-merged = 0
-
-[[plugins]]
-repo = 'LucHermitte/lh-vim-lib'
-
-[[plugins]]
-repo = 'LucHermitte/local_vimrc'
-depends = ['LucHermitte/lh-vim-lib']
-
-[[plugins]]
-repo = 'soramugi/auto-ctags.vim'
-hook_add = '''
-let g:auto_ctags = 1
-let g:auto_ctags_directory_list = ['.git']
-let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
-set tags+=.git/tags
-'''
-
-[[plugins]]
-repo = 'heavenshell/vim-jsdoc'
-
-[[plugins]]
 repo = 'rhysd/vim-gfm-syntax'
 hook_add = '''
 let g:gfm_syntax_emoji_conceal = 1
@@ -159,12 +171,38 @@ let g:gfm_syntax_emoji_conceal = 1
 [[plugins]]
 repo = 'thinca/vim-ref'
 
-[[plugins]]
-repo = 'ekalinin/Dockerfile.vim'
 
+###################
+# Theme
+###################
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+merged = 0
+
+
+###################
+# Plugin custom
+###################
+[[plugins]]
+repo = 'LucHermitte/lh-vim-lib'
+
+[[plugins]]
+repo = 'LucHermitte/local_vimrc'
+depends = ['LucHermitte/lh-vim-lib']
+
+
+###################
+# MISC file type plugins
+###################
 [[plugins]]
 repo = 'vim-scripts/groovyindent-unix'
 
 [[plugins]]
 repo = 'martinda/Jenkinsfile-vim-syntax'
+
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+
+[[plugins]]
+repo = 'heavenshell/vim-jsdoc'
 

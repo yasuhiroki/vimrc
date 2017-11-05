@@ -36,6 +36,9 @@ hook_source = '''
   let g:js_indent_typescript = 1
 '''
 
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
 
 ###################
 # Go-lang
