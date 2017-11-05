@@ -2,6 +2,7 @@
 " FILE: vimrc
 "==============================================================================
 if has('python3')
+  set pyxversion=3
 endif
 
 " Plugin Management {{{1
