@@ -97,6 +97,7 @@ set number
 set title
 set ruler
 set hlsearch
+set incsearch
 set showcmd
 
 "------------------------------------------------------------------------------
