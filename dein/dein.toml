@@ -42,9 +42,9 @@ hook_source = 'source ~/.vim/dein/neosnippet.rc.vim'
 # Git
 ###################
 [[plugins]]
-repo = 'tpope/vim-fugitive'
+repo = 'lambdalisue/gina.vim'
 hook_add = '''
-    set statusline=%=\ %{fugitive#statusline()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
+    set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 '''
 
 [[plugins]]
