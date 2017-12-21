@@ -106,10 +106,13 @@ endif
 # Lint
 ###################
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'yasuhiroki/ale'
+rev = 'support-textlint'
 hook_add = '''
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'markdown': ['textlint'],
+\   'text': ['textlint'],
 \}
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
