@@ -22,13 +22,6 @@ repo = 'fishbullet/deoplete-ruby'
 ###################
 # Snippets
 ###################
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-depends = ['neosnippet-snippets', 'context_filetype.vim']
-hook_source = 'source ~/.vim/dein/neosnippet.rc.vim'
 
 
 ###################
@@ -42,9 +35,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'cohama/agit.vim'
-
-[[plugins]]
-repo = 'idanarye/vim-merginal'
 
 
 ###################
