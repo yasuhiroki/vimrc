@@ -110,7 +110,10 @@ repo = 'yasuhiroki/ale'
 rev = 'support-textlint'
 hook_add = '''
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'prettier'],
+\   'json': ['prettier'],
+\   'css': ['prettier'],
+\   'scss': ['prettier'],
 \   'markdown': ['textlint'],
 \   'text': ['textlint'],
 \}
