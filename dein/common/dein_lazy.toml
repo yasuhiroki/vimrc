@@ -1,0 +1,15 @@
+###################
+# Ruby
+###################
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+on_ft = ['ruby']
+hook_source = '''
+let g:ruby_indent_access_modifier_style = 'indent'
+let g:ruby_indent_block_style = 'do'
+'''
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = ['ruby']
+

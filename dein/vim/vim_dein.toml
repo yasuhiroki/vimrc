@@ -1,11 +1,4 @@
 ###################
-# dein.vim
-###################
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
-
-###################
 # Completion
 ###################
 [[plugins]]
@@ -103,29 +96,6 @@ endif
 
 
 ###################
-# Lint
-###################
-[[plugins]]
-repo = 'yasuhiroki/ale'
-rev = 'support-textlint'
-hook_add = '''
-let g:ale_linters = {
-\   'javascript': ['eslint', 'prettier'],
-\   'json': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier'],
-\   'markdown': ['textlint'],
-\   'text': ['textlint'],
-\}
-let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\}
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-'''
-
-
-###################
 # Coding support
 ###################
 [[plugins]]
@@ -179,14 +149,6 @@ let g:gfm_syntax_emoji_conceal = 1
 
 [[plugins]]
 repo = 'thinca/vim-ref'
-
-
-###################
-# Theme
-###################
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
-merged = 0
 
 
 ###################

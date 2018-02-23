@@ -1,14 +1,10 @@
 "==============================================================================
-" FILE: vimrc
+" FILE: nvimrc(init.vim)
 "==============================================================================
-if has('python3')
-  set pyxversion=3
-endif
-
 " Plugin Management {{{1
 "  Using dein to magnage plugins.
 "
-let s:dein_dir = expand('~/.vim/dein')
+let s:dein_dir = expand('~/.config/nvim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " Install dein
@@ -26,19 +22,19 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:toml          = s:dein_dir . '/dein.toml'
-  let s:lazy_toml     = s:dein_dir . '/dein_lazy.toml'
-  let s:vim_toml      = s:dein_dir . '/vim_dein.toml'
-  let s:vim_lazy_toml = s:dein_dir . '/vim_dein_lazy.toml'
-  let s:_toml         = s:dein_dir . '/local_dein.toml'
-  let s:_lazy_toml    = s:dein_dir . '/local_dein_lazy.toml'
+  let s:toml           = s:dein_dir . '/dein.toml'
+  let s:lazy_toml      = s:dein_dir . '/dein_lazy.toml'
+  let s:nvim_toml      = s:dein_dir . '/nvim_dein.toml'
+  let s:nvim_lazy_toml = s:dein_dir . '/nvim_dein_lazy.toml'
+  let s:_toml          = s:dein_dir . '/local_dein.toml'
+  let s:_lazy_toml     = s:dein_dir . '/local_dein_lazy.toml'
 
-  call dein#load_toml(s:toml,          {'lazy': 0})
-  call dein#load_toml(s:lazy_toml,     {'lazy': 1})
-  call dein#load_toml(s:vim_toml,      {'lazy': 0})
-  call dein#load_toml(s:vim_lazy_toml, {'lazy': 1})
-  call dein#load_toml(s:_toml,         {'lazy': 0})
-  call dein#load_toml(s:_lazy_toml,    {'lazy': 1})
+  call dein#load_toml(s:toml,           {'lazy': 0})
+  call dein#load_toml(s:lazy_toml,      {'lazy': 1})
+  call dein#load_toml(s:nvim_toml,      {'lazy': 0})
+  call dein#load_toml(s:nvim_lazy_toml, {'lazy': 1})
+  call dein#load_toml(s:_toml,          {'lazy': 0})
+  call dein#load_toml(s:_lazy_toml,     {'lazy': 1})
 
   if dein#check_install()
     call dein#install()
@@ -53,7 +49,7 @@ endif
 
 if has("mac")
   " lua is installed by homebrew
-  set luadll=/usr/local/Cellar/lua/5.2.4_4/lib/liblua.dylib
+  " set luadll=/usr/local/Cellar/lua/5.2.4_4/lib/liblua.dylib
 end
 
 filetype plugin indent on
