@@ -53,3 +53,13 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 '''
+
+
+###################
+# Git
+###################
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+hook_add = '''
+    set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
+'''

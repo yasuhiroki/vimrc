@@ -20,24 +20,6 @@ repo = 'fishbullet/deoplete-ruby'
 
 
 ###################
-# Snippets
-###################
-
-
-###################
-# Git
-###################
-[[plugins]]
-repo = 'lambdalisue/gina.vim'
-hook_add = '''
-    set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
-'''
-
-[[plugins]]
-repo = 'cohama/agit.vim'
-
-
-###################
 # Quickrun
 ###################
 [[plugins]]
@@ -45,6 +27,13 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
+
+
+###################
+# Git
+###################
+[[plugins]]
+repo = 'cohama/agit.vim'
 
 
 ###################
