@@ -57,14 +57,6 @@ let g:ctrlp_custom_ignore = {
 '''
 
 [[plugins]]
-repo = 'nixprime/cpsm'
-build = 'PY3=ON bash install.sh'
-depends = ['ctrlp.vim']
-hook_add = '''
-  let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-'''
-
-[[plugins]]
 repo = 'rking/ag.vim'
 hook_add = '''
 if executable('ag')
