@@ -38,8 +38,7 @@ let g:ctrlp_custom_ignore = {
 # Lint
 ###################
 [[plugins]]
-repo = 'yasuhiroki/ale'
-rev = 'support-textlint'
+repo = 'w0rp/ale'
 hook_add = '''
 let g:ale_fixers = {
 \   'javascript': ['prettier-eslint'],
