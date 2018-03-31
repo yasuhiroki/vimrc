@@ -62,3 +62,10 @@ repo = 'lambdalisue/gina.vim'
 hook_add = '''
     set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
 '''
+
+
+###################
+# Zshef
+###################
+[[plugins]]
+repo = 'yasuhiroki/zshef.vim'
