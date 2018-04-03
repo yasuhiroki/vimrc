@@ -75,10 +75,12 @@ vim_config_dir=".vim"
 ftplugin_dir="${vim_config_dir}/ftplugin"
 template_dir="${vim_config_dir}/template"
 ftdetect_dir="${vim_config_dir}/ftdetect"
+syntax_dir="${vim_config_dir}/syntax"
 nvim_config_dir=".config/nvim"
 nvim_ftplugin_dir="${nvim_config_dir}/ftplugin"
 nvim_template_dir="${nvim_config_dir}/template"
 nvim_ftdetect_dir="${nvim_config_dir}/ftdetect"
+nvim_syntax_dir="${nvim_config_dir}/syntax"
 
 ####================------------------------==================#####
 # Body {{{1
@@ -93,10 +95,12 @@ cd $script_dir
 CreateDir "$HOME/${vim_config_dir}/dein"
 CreateDir "$HOME/${vim_config_dir}/swap"
 CreateDir "$HOME/${vim_config_dir}/backup"
+CreateDir "$HOME/${syntax_dir}"
 
 CreateDir "$HOME/${nvim_config_dir}/dein"
 CreateDir "$HOME/${nvim_config_dir}/swap"
 CreateDir "$HOME/${nvim_config_dir}/backup"
+CreateDir "$HOME/${nvim_syntax_dir}"
 
 # setup .vimrc file
 Echo_Line 2
@@ -110,6 +114,7 @@ cp -f dein/common/* dein/vim/* $HOME/${vim_config_dir}/dein/
 UpdateDir "vim/ftplugin" "$HOME/$ftplugin_dir"
 UpdateDir "template" "$HOME/$template_dir"
 UpdateDir "vim/ftdetect" "$HOME/$ftdetect_dir"
+UpdateDir "vim/syntax" "$HOME/$syntax_dir"
 echo
 
 Echo_Line 2
@@ -123,6 +128,7 @@ cp -f dein/common/* dein/nvim/* $HOME/${nvim_config_dir}/dein/
 UpdateDir "vim/ftplugin" "$HOME/$nvim_ftplugin_dir"
 UpdateDir "template" "$HOME/$nvim_template_dir"
 UpdateDir "vim/ftdetect" "$HOME/$nvim_ftdetect_dir"
+UpdateDir "vim/syntax" "$HOME/$nvim_syntax_dir"
 )
 
 echo
