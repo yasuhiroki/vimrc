@@ -148,3 +148,6 @@ repo = 'ekalinin/Dockerfile.vim'
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'
 
+[[plugins]]
+repo = 'posva/vim-vue'
+
