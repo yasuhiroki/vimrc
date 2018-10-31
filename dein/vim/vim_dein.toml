@@ -1,25 +1,4 @@
 ###################
-# Completion
-###################
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_source = '''
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
-'''
-
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-
-[[plugins]]
-repo = 'fishbullet/deoplete-ruby'
-
-
-###################
 # Quickrun
 ###################
 [[plugins]]
