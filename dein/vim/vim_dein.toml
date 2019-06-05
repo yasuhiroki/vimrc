@@ -91,14 +91,17 @@ let g:buftabs_in_statusline = 1
 let g:buftabs_active_highlight_group="Visual"
 '''
 
-[[plugins]]
+[[plugins]] # Filer
 repo = 'scrooloose/nerdtree'
 
-[[plugins]]
+[[plugins]] # Emoji
 repo = 'rhysd/vim-gfm-syntax'
 hook_add = '''
 let g:gfm_syntax_emoji_conceal = 1
 '''
+
+[[plugins]]
+repo = 'vim-scripts/AnsiEsc.vim'
 
 
 ###################
