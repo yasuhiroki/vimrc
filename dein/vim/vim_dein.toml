@@ -128,6 +128,9 @@ repo = 'martinda/Jenkinsfile-vim-syntax'
 repo = 'ekalinin/Dockerfile.vim'
 
 [[plugins]]
+repo = 'yasuhiroki/circleci.vim'
+
+[[plugins]]
 repo = 'heavenshell/vim-jsdoc'
 
 [[plugins]]
