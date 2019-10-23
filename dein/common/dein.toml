@@ -38,7 +38,7 @@ let g:ctrlp_custom_ignore = {
 # Lint
 ###################
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 hook_add = '''
 let g:ale_linter_aliases = {
 \   'gina-commit': ['markdown'],
