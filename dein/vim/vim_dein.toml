@@ -131,6 +131,9 @@ repo = 'ekalinin/Dockerfile.vim'
 repo = 'yasuhiroki/circleci.vim'
 
 [[plugins]]
+repo = 'yasuhiroki/github-actions-yaml.vim'
+
+[[plugins]]
 repo = 'heavenshell/vim-jsdoc'
 
 [[plugins]]
