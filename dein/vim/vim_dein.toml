@@ -63,15 +63,8 @@ repo = 'soramugi/auto-ctags.vim'
 hook_add = '''
 let g:auto_ctags = 1
 let g:auto_ctags_directory_list = ['.git']
-let g:auto_ctags_filetype_mode = 1
-set tags+=.git/java.tags;~
-set tags+=.git/javascript.tags;~
-set tags+=.git/python.tags;~
-set tags+=.git/ruby.tags;~
-set tags+=.git/erb.tags;~
-set tags+=.git/sh.tags;~
-set tags+=.git/vim.tags;~
-set tags+=.git/yaml.tags;~
+let g:auto_ctags_tags_args = ['$(git ls-files -o -i --directory --exclude-standard | sed "s/^/--exclude=/")', '--tag-relative=yes', '--recurse=yes', '--sort=yes']
+set tags+=.git/tags;~
 '''
 
 [[plugins]]
