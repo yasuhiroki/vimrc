@@ -76,15 +76,6 @@ autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>i  <Plug>(go-info)
 '''
 
-
-###################
-# Ruby
-###################
-[[plugins]]
-repo = 'tpope/vim-rails'
-on_ft = ['ruby']
-
-
 ###################
 # Elixir
 ###################
