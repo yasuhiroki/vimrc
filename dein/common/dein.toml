@@ -14,27 +14,6 @@ merged = 0
 
 
 ###################
-# CtrlP
-###################
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-let g:ctrlp_use_migemo = 1 " Don't install migemo yet
-let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
-let g:ctrlp_mruf_max            = 500 " Max memorable mru
-let g:ctrlp_open_new_file       = 1   " Open new file as tab
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-'''
-
-
-###################
 # Lint
 ###################
 [[plugins]]
