@@ -62,8 +62,9 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'soramugi/auto-ctags.vim'
 hook_add = '''
 let g:auto_ctags = 1
+let g:auto_ctags_bin_path = 'y_ctags'
 let g:auto_ctags_directory_list = ['.git']
-let g:auto_ctags_tags_args = ['$(git ls-files -o -i --directory --exclude-standard | sed "s/^/--exclude=/")', '--tag-relative=yes', '--recurse=yes', '--sort=yes']
+let g:auto_ctags_tags_args = ['--tag-relative=yes', '--recurse=yes', '--sort=yes']
 set tags+=.git/tags;~
 '''
 
