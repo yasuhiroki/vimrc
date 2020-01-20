@@ -14,7 +14,6 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 [[plugins]]
 repo = 'cohama/agit.vim'
 
-
 ###################
 # CtrlP
 ###################
@@ -80,13 +79,6 @@ let g:indent_guides_enable_on_vim_startup=1
 [[plugins]]
 repo = 'thinca/vim-ref'
 
-[[plugins]]
-repo = 'SirVer/ultisnips'
-
-[[plugins]]
-repo = 'honza/vim-snippets'
-
-
 ###################
 # View
 ###################
@@ -109,17 +101,6 @@ let g:gfm_syntax_emoji_conceal = 1
 
 [[plugins]]
 repo = 'vim-scripts/AnsiEsc.vim'
-
-
-###################
-# Local configuration
-###################
-[[plugins]]
-repo = 'LucHermitte/lh-vim-lib'
-
-[[plugins]]
-repo = 'LucHermitte/local_vimrc'
-depends = ['LucHermitte/lh-vim-lib']
 
 
 ###################
