@@ -47,6 +47,14 @@ set omnifunc=ale#completion#OmniFunc
 repo = 'lambdalisue/gina.vim'
 hook_add = '''
     set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
+    call gina#custom#mapping#nmap(
+            \ 'blame', 'dd',
+            \ '<Plug>(gina-changes-of-above)'
+            \)
+    call gina#custom#mapping#nmap(
+            \ 'blame', 'o',
+            \ '<Plug>(gina-browse)'
+            \)
 '''
 
 
