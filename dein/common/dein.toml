@@ -35,6 +35,14 @@ let g:ale_fixers = {
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 
+call ale#linter#Define('sql', {
+\   'name': 'sqls',
+\   'lsp': 'stdio',
+\   'executable': 'sqls',
+\   'project_root': './',
+\   'command': '%e',
+\})
+
 let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc
 '''
