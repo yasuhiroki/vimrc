@@ -65,6 +65,8 @@ syntax enable
 " vim-ruby の最新版が必要なら dein で入れる
 let g:ruby_indent_access_modifier_style = 'indent'
 let g:ruby_indent_block_style = 'do'
+" ft_sql の補完機能は独特の設定なので使わない
+let g:omni_sql_no_default_maps = 1
 "# 1}}}
 
 "==============================================================================
