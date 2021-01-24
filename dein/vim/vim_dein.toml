@@ -61,6 +61,7 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'soramugi/auto-ctags.vim'
 hook_add = '''
 let g:auto_ctags = 1
+let g:auto_ctags_set_tags_option = 1
 let g:auto_ctags_bin_path = 'y_ctags'
 let g:auto_ctags_directory_list = ['.git']
 let g:auto_ctags_tags_args = ['--tag-relative=yes', '--recurse=yes', '--sort=yes']
