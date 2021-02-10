@@ -19,12 +19,9 @@ merged = 0
 [[plugins]]
 repo = 'dense-analysis/ale'
 hook_add = '''
+let g:ale_disable_lsp = 1
 let g:ale_linter_aliases = {
 \   'gina-commit': ['markdown'],
-\}
-let g:ale_linters = {
-\   'typescript': ['tsserver'],
-\   'go': ['gopls'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier-eslint'],
@@ -35,18 +32,26 @@ let g:ale_fixers = {
 \}
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-
-call ale#linter#Define('sql', {
-\   'name': 'sqls',
-\   'lsp': 'stdio',
-\   'executable': 'sqls',
-\   'project_root': './',
-\   'command': '%e',
-\})
-
-let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
 '''
+
+###################
+# LSP
+###################
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+let g:lsp_settings = {
+\   'yaml-language-server': {
+\       'allowlist': ['yaml', 'yaml.circleci']
+\   }
+\}
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 
 ###################
