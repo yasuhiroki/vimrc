@@ -5,6 +5,11 @@ if has('python3')
   set pyxversion=3
 endif
 
+if has("mac")
+  " lua is installed by homebrew
+  set luadll=/usr/local/opt/lua@5.3/lib/liblua.dylib
+end
+
 " Plugin Management {{{1
 "  Using dein to magnage plugins.
 "
@@ -50,11 +55,6 @@ endif
 
 "2}}}
 "1}}}
-
-if has("mac")
-  " lua is installed by homebrew
-  set luadll=/usr/local/Cellar/lua/5.2.4_4/lib/liblua.dylib
-end
 
 filetype plugin indent on
 syntax enable
