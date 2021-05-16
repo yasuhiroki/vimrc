@@ -30,6 +30,13 @@ let g:ale_fixers = {
 \   'scss': ['prettier'],
 \   'ruby': ['rubocop'],
 \}
+
+let g:ale_pattern_options = {
+\ '\..*\.js$': {'ale_linters': [], 'ale_fixers': []},
+\ '\..*\.css$': {'ale_linters': [], 'ale_fixers': []},
+\}
+let g:ale_pattern_options_enabled = 1
+
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 '''
