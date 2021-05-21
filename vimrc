@@ -67,7 +67,7 @@ let g:ruby_indent_access_modifier_style = 'indent'
 let g:ruby_indent_block_style = 'do'
 " ft_sql の補完機能は独特の設定なので使わない
 let g:omni_sql_no_default_maps = 1
-let $BASH_ENV='~/.vimrc/alias_for_vim.sh'
+let $BASH_ENV='~/.vim/alias_for_vim.sh'
 "# 1}}}
 
 "==============================================================================
