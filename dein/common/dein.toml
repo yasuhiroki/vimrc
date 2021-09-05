@@ -60,6 +60,26 @@ repo = 'prabirshrestha/asyncomplete.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+hook_add = '''
+imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
+let g:vsnip_filetypes = {}
+'''
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+
 
 ###################
 # Git
