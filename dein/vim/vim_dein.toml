@@ -120,9 +120,15 @@ repo = 'ekalinin/Dockerfile.vim'
 
 [[plugins]]
 repo = 'yasuhiroki/circleci.vim'
+hook_add = '''
+let g:circleci_omnifunc_enable = 0
+'''
 
 [[plugins]]
 repo = 'yasuhiroki/github-actions-yaml.vim'
+hook_add = '''
+let g:gha_completion = 0
+'''
 
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'

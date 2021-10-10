@@ -46,12 +46,33 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 ###################
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> <f2> <plug>(lsp-rename)
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+'''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
 let g:lsp_settings = {
 \   'yaml-language-server': {
-\       'allowlist': ['yaml', 'yaml.circleci']
+\       'allowlist': ['yaml', 'yaml.circleci', 'yaml.gha'],
+\       'workspace_config': {
+\           'yaml': {
+\               'schemas': {
+\                   'https://json.schemastore.org/circleciconfig.json': ['.circleci/config.yml'],
+\                   'https://json.schemastore.org/github-action.json': ['.github/actions/*.yml']
+\               }
+\           }
+\      }
 \   }
 \}
 '''
