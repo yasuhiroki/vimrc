@@ -51,7 +51,9 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
     nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> <f2> <plug>(lsp-rename)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> K <plug>(lsp-hover)
+    let g:lsp_format_sync_timeout = 1000
 endfunction
 
 augroup lsp_install
@@ -76,10 +78,6 @@ let g:lsp_settings = {
 \   }
 \}
 '''
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
