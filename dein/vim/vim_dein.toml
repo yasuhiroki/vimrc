@@ -5,6 +5,7 @@
 repo = 'thinca/vim-quickrun'
 hook_add = '''
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nnoremap <leader>r :QuickRun<CR>
 '''
 
 
