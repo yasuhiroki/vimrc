@@ -60,6 +60,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gr <plug>(lsp-references)
     nmap <buffer> K <plug>(lsp-hover)
+    nmap <buffer> ]c :LspNextDiagnostic<CR>
+    nmap <buffer> [c :LspPreviousDiagnostic<CR>
     let g:lsp_format_sync_timeout = 1000
 endfunction
 
@@ -67,6 +69,9 @@ augroup lsp_install
     au!
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
 '''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
