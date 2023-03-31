@@ -28,6 +28,7 @@ let g:ale_linter_aliases = {
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'ruby': ['rubocop'],
+\   'python': ['pylint'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier-eslint'],
