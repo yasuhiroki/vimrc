@@ -41,6 +41,14 @@ repo = 'leafgarland/typescript-vim'
 
 
 ###################
+# Python
+###################
+[[plugins]]
+on_ft = ['python']
+repo = 'Vimjas/vim-python-pep8-indent'
+
+
+###################
 # Go-lang
 ###################
 [[plugins]]
