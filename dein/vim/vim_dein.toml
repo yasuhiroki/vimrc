@@ -124,6 +124,7 @@ function! s:init_fern() abort
     \   "<Plug>(fern-action-collapse)",
     \ )
   nmap <buffer> <CR> <Plug>(fern-action-open-or-expand-or-collapse)
+  nmap <buffer> x <Plug>(fern-action-focus:parent)<Plug>(fern-action-collapse)
   nmap <buffer> o <Plug>(fern-action-open:edit)
   nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
   nmap <buffer> t <Plug>(fern-action-open:tabedit)
