@@ -209,3 +209,5 @@ let g:markdown_fenced_languages = [
 \]
 '''
 
+[[plugins]]
+repo = 'jparise/vim-graphql'
