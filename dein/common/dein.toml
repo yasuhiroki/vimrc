@@ -138,6 +138,16 @@ hook_add = '''
             \)
 '''
 
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+hook_add = '''
+    let g:denops_disable_version_check = 1
+'''
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+depends = ['vim-denops/denops.vim']
+
+
 
 ###################
 # Zshef
