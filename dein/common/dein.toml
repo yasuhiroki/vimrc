@@ -146,7 +146,15 @@ hook_add = '''
 [[plugins]]
 repo = 'lambdalisue/gin.vim'
 depends = ['vim-denops/denops.vim']
+hook_add = '''
+	let g:gin_log_default_args = ['--graph', '--decorate']
+    autocmd FileType gin-log nnoremap <buffer> <nowait> o <Plug>(gin-action-browse)
 
+    nmap <Leader>gs :GinStatus<CR>
+    nmap <Leader>gc :Gin Commit<CR>
+    nmap <Leader>gl :GinLog<CR>
+    nmap <Leader>gb :Gina blame<CR>
+'''
 
 
 ###################
