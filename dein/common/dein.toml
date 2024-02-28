@@ -151,7 +151,7 @@ hook_add = '''
     autocmd FileType gin-log nnoremap <buffer> <nowait> o <Plug>(gin-action-browse)
 
     nmap <Leader>gs :GinStatus<CR>
-    nmap <Leader>gc :Gin Commit<CR>
+    nmap <Leader>gc :Gin commit<CR>
     nmap <Leader>gl :GinLog<CR>
     nmap <Leader>gb :Gina blame<CR>
 '''
