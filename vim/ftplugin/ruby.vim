@@ -12,4 +12,7 @@ let b:undo_ftplugin .= 'setl modeline<'
 " set indent.
 setlocal shiftwidth=2 softtabstop=2 tabstop=2
 
+" foldmethod=syntax is slow insert mode in large ruby file
+setlocal foldmethod=manual
+
 let &cpo = s:save_cpo
