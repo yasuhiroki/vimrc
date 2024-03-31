@@ -167,6 +167,7 @@ hook_add = '''
 
 	let g:gin_log_default_args = ['--graph', '--decorate']
     autocmd FileType gin-log nnoremap <buffer> <nowait> o <Plug>(gin-action-browse)
+    autocmd FileType gin-log nnoremap <buffer> <nowait> f <Plug>(gin-action-fixup)
 
     nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
     nmap <Leader>gc :Gin commit<CR>
