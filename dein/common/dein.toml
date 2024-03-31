@@ -147,12 +147,30 @@ hook_add = '''
 repo = 'lambdalisue/gin.vim'
 depends = ['vim-denops/denops.vim']
 hook_add = '''
+    function! OpenGinTab(ginCommand)
+        let searchName = '^' . tolower(a:ginCommand)
+        let tabCount = tabpagenr('$')
+        for tabnum in range(1, tabCount)
+            for winnr in range(1, tabpagewinnr(tabnum, '$'))
+                let bufnr = tabpagebuflist(tabnum)[winnr - 1]
+                let name = bufname(bufnr)
+                if match(name, searchName) != -1
+                    execute 'tabn ' . tabnum
+                    execute winnr . 'wincmd w'
+                    return
+                endif
+            endfor
+        endfor
+        execute 'tabnew'
+        execute a:ginCommand
+    endfunction
+
 	let g:gin_log_default_args = ['--graph', '--decorate']
     autocmd FileType gin-log nnoremap <buffer> <nowait> o <Plug>(gin-action-browse)
 
-    nmap <Leader>gs :GinStatus<CR>
+    nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
     nmap <Leader>gc :Gin commit<CR>
-    nmap <Leader>gl :GinLog<CR>
+    nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
     nmap <Leader>gb :Gina blame<CR>
 '''
 
