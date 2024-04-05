@@ -172,6 +172,7 @@ hook_add = '''
     nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
     nmap <Leader>gc :Gin commit<CR>
     nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
+    nmap <Leader>gg :Gina qrep 
     nmap <Leader>gb :Gina blame<CR>
 '''
 
