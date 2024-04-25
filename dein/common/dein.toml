@@ -76,11 +76,19 @@ let g:lsp_diagnostics_virtual_text_enabled = 0
 " for debugging
 " let g:lsp_log_file = './lsp.log'
 
-au User lsp_setup call lsp#register_server({
-        \ 'name': 'rubocop',
-        \ 'cmd': {server_info->['rubocop', '--lsp']},
-        \ 'allowlist': ['ruby']
-        \ })
+if !system('bundle exec rubocop -v')
+    au User lsp_setup call lsp#register_server({
+            \ 'name': 'rubocop',
+            \ 'cmd': {server_info->['bundle', 'exec', 'rubocop', '--lsp']},
+            \ 'allowlist': ['ruby']
+            \ })
+else
+    au User lsp_setup call lsp#register_server({
+            \ 'name': 'rubocop',
+            \ 'cmd': {server_info->['rubocop', '--lsp']},
+            \ 'allowlist': ['ruby']
+            \ })
+endif
 '''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
@@ -96,7 +104,8 @@ let g:lsp_settings = {
 \               }
 \           }
 \      }
-\   }
+\   },
+\   'typeprof': {'disabled': 1}
 \}
 '''
 
