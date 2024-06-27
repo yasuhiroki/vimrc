@@ -146,6 +146,7 @@ hook_add = '''
             \ 'blame', 'o',
             \ '<Plug>(gina-browse)'
             \)
+    nmap <Leader>ga :Agit<CR>
 '''
 
 [[plugins]]
