@@ -77,7 +77,7 @@ let g:lsp_diagnostics_virtual_text_enabled = 0
 " for debugging
 " let g:lsp_log_file = './lsp.log'
 
-if !system('bundle exec rubocop -v')
+if system('bundle exec rubocop -v')
     au User lsp_setup call lsp#register_server({
             \ 'name': 'rubocop',
             \ 'cmd': {server_info->['bundle', 'exec', 'rubocop', '--lsp']},
