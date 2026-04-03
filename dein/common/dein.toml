@@ -170,6 +170,8 @@ hook_add = '''
     nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
     nmap <Leader>gg :Ag 
     nmap <Leader>gb :GinBlame %:p<CR>
+    xnoremap <Leader>go y:<C-u>execute 'GinBrowse --commit ' .. trim(@")<CR>
+    nnoremap <Leader>go <Plug>(gin-action-browse)
 '''
 
 
