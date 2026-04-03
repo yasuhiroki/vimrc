@@ -23,7 +23,6 @@ let g:ale_disable_lsp = 1
 let g:ale_virtualtext_cursor = 0
 let g:ale_floating_preview = 1
 let g:ale_linter_aliases = {
-\   'gina-commit': ['markdown'],
 \}
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
@@ -136,21 +135,6 @@ repo = 'rafamadriz/friendly-snippets'
 # Git
 ###################
 [[plugins]]
-repo = 'lambdalisue/gina.vim'
-hook_add = '''
-    set statusline=%=\ %{gina#component#repo#preset()}[%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\[%04l,%03v][%p%%]
-    call gina#custom#mapping#nmap(
-            \ 'blame', 'dd',
-            \ '<Plug>(gina-changes-of-above)'
-            \)
-    call gina#custom#mapping#nmap(
-            \ 'blame', 'o',
-            \ '<Plug>(gina-browse)'
-            \)
-    nmap <Leader>ga :Agit<CR>
-'''
-
-[[plugins]]
 repo = 'vim-denops/denops.vim'
 hook_add = '''
     let g:denops_disable_version_check = 1
@@ -178,14 +162,14 @@ hook_add = '''
     endfunction
 
 	let g:gin_log_default_args = ['--graph', '--decorate']
-    autocmd FileType gin-log nnoremap <buffer> <nowait> o <Plug>(gin-action-browse)
+    autocmd FileType gin-log nnoremap <buffer> <nowait> o :GinBrowse --commit <CR>
     autocmd FileType gin-log nnoremap <buffer> <nowait> f <Plug>(gin-action-fixup)
 
     nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
     nmap <Leader>gc :Gin commit<CR>
     nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
-    nmap <Leader>gg :Gina qrep 
-    nmap <Leader>gb :Gina blame<CR>
+    nmap <Leader>gg :Ag 
+    nmap <Leader>gb :GinBlame %:p<CR>
 '''
 
 
