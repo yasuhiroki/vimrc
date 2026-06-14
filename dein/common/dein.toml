@@ -181,3 +181,10 @@ hook_add = '''
 [[plugins]]
 repo = 'yasuhiroki/zshef.vim'
 
+
+###################
+# Zoho Deluge
+###################
+[[plugins]]
+repo = 'yasuhiroki/zoho-deluge.vim'
+
