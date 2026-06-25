@@ -188,3 +188,9 @@ repo = 'yasuhiroki/zshef.vim'
 [[plugins]]
 repo = 'yasuhiroki/zoho-deluge.vim'
 
+
+###################
+# d2
+###################
+[[plugins]]
+repo = 'terrastruct/d2-vim'
