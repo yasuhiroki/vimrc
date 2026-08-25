@@ -11,47 +11,46 @@ if has("mac")
 end
 
 " Plugin Management {{{1
-"  Using dein to magnage plugins.
+"  Using dpp.vim to manage plugins.
 "
-let s:dein_dir = expand('~/.vim/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dpp_base = expand('~/.cache/dpp')
+let s:dpp_config = expand('~/.vim/dpp/dpp.ts')
 
-" Install dein
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+" Required plugins to bootstrap dpp.vim
+let s:dpp_repos = [
+\   'Shougo/dpp.vim',
+\   'vim-denops/denops.vim',
+\   'Shougo/dpp-ext-installer',
+\   'Shougo/dpp-ext-toml',
+\   'Shougo/dpp-ext-lazy',
+\   'Shougo/dpp-protocol-git',
+\]
+
+" Ensure runtimepath and clone if not present
+for s:repo in s:dpp_repos
+  let s:dir = s:dpp_base . '/repos/github.com/' . s:repo
+  if !isdirectory(s:dir)
+    execute '!git clone https://github.com/' . s:repo s:dir
   endif
-  " Add dein.vim to head of runtimepath
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
+  execute 'set runtimepath^=' . fnamemodify(s:dir, ':p')
+endfor
+
 if &compatible
   set nocompatible
 endif
 
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  let s:toml          = s:dein_dir . '/dein.toml'
-  let s:lazy_toml     = s:dein_dir . '/dein_lazy.toml'
-  let s:vim_toml      = s:dein_dir . '/vim_dein.toml'
-  let s:vim_lazy_toml = s:dein_dir . '/vim_dein_lazy.toml'
-  let s:_toml         = s:dein_dir . '/local_dein.toml'
-  let s:_lazy_toml    = s:dein_dir . '/local_dein_lazy.toml'
-
-  call dein#load_toml(s:toml,          {'lazy': 0})
-  call dein#load_toml(s:lazy_toml,     {'lazy': 1})
-  call dein#load_toml(s:vim_toml,      {'lazy': 0})
-  call dein#load_toml(s:vim_lazy_toml, {'lazy': 1})
-  call dein#load_toml(s:_toml,         {'lazy': 0})
-  call dein#load_toml(s:_lazy_toml,    {'lazy': 1})
-
-  if dein#check_install()
-    call dein#install()
-  endif
-
-  call dein#end()
-  call dein#save_state()
+if dpp#min#load_state(s:dpp_base)
+  autocmd User DenopsReady
+  \ : echohl WarningMsg
+  \ | echomsg 'dpp load_state failed: regenerating state...'
+  \ | echohl None
+  \ | call dpp#make_state(s:dpp_base, s:dpp_config)
 endif
+
+" User commands for plugin management
+command! DppInstall   call dpp#async_ext_action('installer', 'install')
+command! DppUpdate    call dpp#async_ext_action('installer', 'update')
+command! DppMakeState call dpp#make_state(s:dpp_base, s:dpp_config)
 
 "2}}}
 "1}}}
@@ -62,7 +61,7 @@ syntax enable
 "==============================================================================
 " # Setting {{{1
 "------------------------------------------------------------------------------
-" vim-ruby の最新版が必要なら dein で入れる
+" vim-ruby の最新版が必要なら dpp で入れる
 let g:ruby_indent_access_modifier_style = 'indent'
 let g:ruby_indent_block_style = 'do'
 " ft_sql の補完機能は独特の設定なので使わない
