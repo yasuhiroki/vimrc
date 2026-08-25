@@ -10,50 +10,17 @@ if has("mac")
   set luadll=/usr/local/opt/lua@5.3/lib/liblua.dylib
 end
 
-" Plugin Management {{{1
-"  Using dein to magnage plugins.
-"
-let s:dein_dir = expand('~/.vim/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-" Install dein
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  " Add dein.vim to head of runtimepath
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
 if &compatible
   set nocompatible
 endif
 
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  let s:toml          = s:dein_dir . '/dein.toml'
-  let s:lazy_toml     = s:dein_dir . '/dein_lazy.toml'
-  let s:vim_toml      = s:dein_dir . '/vim_dein.toml'
-  let s:vim_lazy_toml = s:dein_dir . '/vim_dein_lazy.toml'
-  let s:_toml         = s:dein_dir . '/local_dein.toml'
-  let s:_lazy_toml    = s:dein_dir . '/local_dein_lazy.toml'
-
-  call dein#load_toml(s:toml,          {'lazy': 0})
-  call dein#load_toml(s:lazy_toml,     {'lazy': 1})
-  call dein#load_toml(s:vim_toml,      {'lazy': 0})
-  call dein#load_toml(s:vim_lazy_toml, {'lazy': 1})
-  call dein#load_toml(s:_toml,         {'lazy': 0})
-  call dein#load_toml(s:_lazy_toml,    {'lazy': 1})
-
-  if dein#check_install()
-    call dein#install()
-  endif
-
-  call dein#end()
-  call dein#save_state()
+" Plugin Management {{{1
+"  Using vim-plug to manage plugins.
+"
+let s:plugins_vim = expand('~/.vim/plugins.vim')
+if filereadable(s:plugins_vim)
+  execute 'source' s:plugins_vim
 endif
-
-"2}}}
 "1}}}
 
 filetype plugin indent on
@@ -62,9 +29,6 @@ syntax enable
 "==============================================================================
 " # Setting {{{1
 "------------------------------------------------------------------------------
-" vim-ruby の最新版が必要なら dein で入れる
-let g:ruby_indent_access_modifier_style = 'indent'
-let g:ruby_indent_block_style = 'do'
 " ft_sql の補完機能は独特の設定なので使わない
 let g:omni_sql_no_default_maps = 1
 let $BASH_ENV='~/.vim/alias_for_vim.sh'
