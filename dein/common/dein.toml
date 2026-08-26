@@ -194,3 +194,10 @@ repo = 'yasuhiroki/zoho-deluge.vim'
 ###################
 [[plugins]]
 repo = 'terrastruct/d2-vim'
+
+
+###################
+# WezTerm
+###################
+[[plugins]]
+repo = 'yasuhiroki/wezterm.vim'
