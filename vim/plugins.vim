@@ -152,20 +152,6 @@ let g:lsp_diagnostics_virtual_text_enabled = 0
 " for debugging
 " let g:lsp_log_file = './lsp.log'
 
-if system('bundle exec rubocop -v')
-    au User lsp_setup call lsp#register_server({
-            \ 'name': 'rubocop',
-            \ 'cmd': {server_info->['bundle', 'exec', 'rubocop', '--lsp']},
-            \ 'allowlist': ['ruby']
-            \ })
-else
-    au User lsp_setup call lsp#register_server({
-            \ 'name': 'rubocop',
-            \ 'cmd': {server_info->['rubocop', '--lsp']},
-            \ 'allowlist': ['ruby']
-            \ })
-endif
-
 let g:lsp_settings = {
 \   'yaml-language-server': {
 \       'allowlist': ['yaml', 'yaml.circleci', 'yaml.gha'],
@@ -180,6 +166,27 @@ let g:lsp_settings = {
 \   },
 \   'typeprof': {'disabled': 1}
 \}
+
+function! s:lsp_setup_ruby() abort
+    if !exists('s:rubocop_registered')
+        let s:rubocop_registered = 1
+        let l:cmd = ['rubocop', '--lsp']
+        if filereadable('Gemfile') && executable('bundle')
+            let l:cmd = ['bundle', 'exec', 'rubocop', '--lsp']
+        endif
+
+        call lsp#register_server({
+        \   'name': 'rubocop',
+        \   'cmd': {server_info-> l:cmd},
+        \   'allowlist': ['ruby']
+        \ })
+    endif
+endfunction
+
+augroup ft_ruby_config
+    autocmd!
+    autocmd FileType ruby call s:lsp_setup_ruby()
+augroup END
 
 "------------------------------------------------------------------------------
 " vsnip
@@ -374,3 +381,5 @@ let g:ruby_indent_block_style = 'do'
 " JavaScript / TypeScript
 "------------------------------------------------------------------------------
 let g:js_indent_typescript = 1
+
+
