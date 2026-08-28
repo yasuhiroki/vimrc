@@ -44,7 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'thinca/vim-ref'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'lambdalisue/fern.vim', { 'on': ['Fern', 'Tree'] }
+Plug 'lambdalisue/fern.vim'
 
 " View & Syntax
 Plug 'b4b4r07/buftabs'
