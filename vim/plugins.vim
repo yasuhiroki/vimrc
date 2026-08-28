@@ -235,13 +235,30 @@ nmap <Leader>gc :Gin commit<CR>
 nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
 nmap <Leader>gg :Ag 
 nmap <Leader>gb :GinBlame %:p<CR>
+function! s:gin_browse() abort
+    let l:cword = expand('<cword>')
+    if l:cword =~# '^[0-9a-fA-F]\{7,64\}$'
+        return ":\<C-u>GinBrowse --commit " .. l:cword .. "\<CR>"
+    endif
+    return "\<Plug>(gin-action-browse)"
+endfunction
+
 xnoremap <Leader>go y:<C-u>execute 'GinBrowse --commit ' .. trim(@")<CR>
-nnoremap <Leader>go <Plug>(gin-action-browse)
+nmap <expr> <Leader>go <SID>gin_browse()
 
 "------------------------------------------------------------------------------
 " agit.vim
 "------------------------------------------------------------------------------
 nmap <Leader>ga :Agit<CR>
+
+function! s:agit_gin_browse() abort
+    let l:hash = agit#extract_hash(getline('.'))
+    if !empty(l:hash)
+        execute 'GinBrowse --commit ' .. l:hash
+    endif
+endfunction
+
+autocmd FileType agit,agit_stat,agit_diff nnoremap <buffer> <nowait> <silent> go :<C-u>call <SID>agit_gin_browse()<CR>
 
 "------------------------------------------------------------------------------
 " Quickrun
