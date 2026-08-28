@@ -34,6 +34,9 @@ Plug 'vim-denops/denops.vim'
 Plug 'lambdalisue/gin.vim'
 Plug 'cohama/agit.vim', { 'on': 'Agit' }
 
+" Terminal
+Plug 'yasuhiroki/wezterm.vim'
+
 " Tools & Navigation & Coding
 Plug 'thinca/vim-quickrun', { 'on': 'QuickRun' }
 Plug 'ctrlpvim/ctrlp.vim'
