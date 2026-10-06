@@ -40,7 +40,6 @@ Plug 'yasuhiroki/wezterm.vim'
 " Tools & Navigation & Coding
 Plug 'thinca/vim-quickrun', { 'on': 'QuickRun' }
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rking/ag.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
@@ -236,7 +235,7 @@ autocmd FileType gin-log nnoremap <buffer> <nowait> f <Plug>(gin-action-fixup)
 nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
 nmap <Leader>gc :Gin commit<CR>
 nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
-nmap <Leader>gg :Ag 
+nmap <Leader>gg :Rgg 
 nmap <Leader>gb :GinBlame %:p<CR>
 function! s:gin_browse() abort
     let l:cword = expand('<cword>')
@@ -270,7 +269,7 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 nnoremap <leader>r :QuickRun<CR>
 
 "------------------------------------------------------------------------------
-" CtrlP & ag
+" CtrlP & ripgrep
 "------------------------------------------------------------------------------
 let g:ctrlp_use_migemo = 1 " Don't install migemo yet
 let g:ctrlp_clear_cache_on_exit = 0   " Doesn't cache clear when vim quit
@@ -285,9 +284,13 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ }
 
-if executable('ag')
-    let g:ctrlp_use_caching = 0
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  command! -nargs=+ -complete=file Rg execute 'silent grep! -uu <args>' | cwindow | redraw!
+  command! -nargs=+ -complete=file Rgg execute 'silent grep! <args>' | cwindow | redraw!
+
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
 endif
 
 "------------------------------------------------------------------------------
