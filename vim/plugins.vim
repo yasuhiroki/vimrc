@@ -30,9 +30,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
 
 " Git
-Plug 'vim-denops/denops.vim'
-Plug 'lambdalisue/gin.vim'
-Plug 'cohama/agit.vim', { 'on': 'Agit' }
+Plug 'yasuhiroki/gitU.vim'
 
 " Terminal
 Plug 'yasuhiroki/wezterm.vim'
@@ -206,61 +204,12 @@ xmap        S   <Plug>(vsnip-cut-text)
 let g:vsnip_filetypes = {}
 
 "------------------------------------------------------------------------------
-" denops & gin.vim
+" git
 "------------------------------------------------------------------------------
-let g:denops_disable_version_check = 1
-
-function! OpenGinTab(ginCommand)
-    let searchName = '^' . tolower(a:ginCommand)
-    let tabCount = tabpagenr('$')
-    for tabnum in range(1, tabCount)
-        for winnr in range(1, tabpagewinnr(tabnum, '$'))
-            let bufnr = tabpagebuflist(tabnum)[winnr - 1]
-            let name = bufname(bufnr)
-            if match(name, searchName) != -1
-                execute 'tabn ' . tabnum
-                execute winnr . 'wincmd w'
-                return
-            endif
-        endfor
-    endfor
-    execute 'tabnew'
-    execute a:ginCommand
-endfunction
-
-let g:gin_log_default_args = ['--graph', '--decorate']
-autocmd FileType gin-log nnoremap <buffer> <nowait> o :GinBrowse --commit <CR>
-autocmd FileType gin-log nnoremap <buffer> <nowait> f <Plug>(gin-action-fixup)
-
-nmap <Leader>gs :call OpenGinTab('GinStatus')<CR>
-nmap <Leader>gc :Gin commit<CR>
-nmap <Leader>gl :call OpenGinTab('GinLog')<CR>
+nmap <Leader>gs :GitUStatus<CR>
+nmap <Leader>gl :GitULog<CR>
 nmap <Leader>gg :Rgg 
-nmap <Leader>gb :GinBlame %:p<CR>
-function! s:gin_browse() abort
-    let l:cword = expand('<cword>')
-    if l:cword =~# '^[0-9a-fA-F]\{7,64\}$'
-        return ":\<C-u>GinBrowse --commit " .. l:cword .. "\<CR>"
-    endif
-    return "\<Plug>(gin-action-browse)"
-endfunction
-
-xnoremap <Leader>go y:<C-u>execute 'GinBrowse --commit ' .. trim(@")<CR>
-nmap <expr> <Leader>go <SID>gin_browse()
-
-"------------------------------------------------------------------------------
-" agit.vim
-"------------------------------------------------------------------------------
-nmap <Leader>ga :Agit<CR>
-
-function! s:agit_gin_browse() abort
-    let l:hash = agit#extract_hash(getline('.'))
-    if !empty(l:hash)
-        execute 'GinBrowse --commit ' .. l:hash
-    endif
-endfunction
-
-autocmd FileType agit,agit_stat,agit_diff nnoremap <buffer> <nowait> <silent> go :<C-u>call <SID>agit_gin_browse()<CR>
+nmap <Leader>gb :GitUBlame<CR>
 
 "------------------------------------------------------------------------------
 " Quickrun
