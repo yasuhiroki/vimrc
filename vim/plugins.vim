@@ -158,7 +158,7 @@ let g:lsp_settings = {
 \       'workspace_config': {
 \           'yaml': {
 \               'schemas': {
-\                   'https://json.schemastore.org/circleciconfig.json': ['.circleci/config.yml'],
+\                   'https://json.schemastore.org/circleciconfig.json': ['.circleci/*.yml'],
 \                   'https://json.schemastore.org/github-action.json': ['.github/actions/*.yml']
 \               }
 \           }
