@@ -27,7 +27,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
+Plug 'yasuhiroki/friendly-snippets'
 
 " Git
 Plug 'yasuhiroki/gitU.vim'
@@ -202,6 +202,9 @@ nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 
 let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.ruby = ['rails']
+
+set complete+=Fvsnip#completefunc
 
 "------------------------------------------------------------------------------
 " git
