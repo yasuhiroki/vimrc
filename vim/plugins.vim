@@ -164,8 +164,19 @@ let g:lsp_settings = {
 \           }
 \      }
 \   },
-\   'typeprof': {'disabled': 1}
+\   'typeprof': {'disabled': 1},
+\   'ruby-lsp': {'disabled': 1},
+\   'solargraph': {'disabled': 1},
 \}
+
+augroup LspRubyProxy
+autocmd!
+autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'ruby-lsp-proxy',
+      \ 'cmd': {server_info->['ruby-lsp-proxy']},
+      \ 'allowlist': ['ruby', 'eruby'],
+      \ })
+augroup END
 
 function! s:lsp_setup_ruby() abort
     if !exists('s:rubocop_registered')
